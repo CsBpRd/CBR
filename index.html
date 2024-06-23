@@ -8,7 +8,7 @@
     <title>CDBNR | 山河秀丽</title>
     <meta name="description" content="Made with Framer">
     <meta name="framer-search-index" content="https://framerusercontent.com/sites/5oC0pDAGLG3bLAKB7w47zz/searchIndex-UtMnqZhvQvkp.json">
-    <link rel="icon" href="https://framerusercontent.com/images/THehuWhZhVCnkjByW8Ztre8A.png">
+    <link rel="icon" href="https://framerusercontent.com/images/vAkUrMuRmZ5Ee4gFNO4gOMJDpDc.webp">
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="CDBNR | 山河秀丽">
@@ -56,14 +56,375 @@
       .cubox-extension-helper-button:hover svg {
         opacity: 1 !important;
       }    
-    </style><style type="text/css" data-framer-css="true"></style><style type="text/css" data-framer-css="true"></style></head>
+    </style><style type="text/css" data-framer-css="true"></style><style type="text/css" data-framer-css="true"></style><style type="text/css">
+  @font-face {
+    font-family: CuboxInter;
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("chrome-extension://mcoeifhdicjoehjjpnbgifopchnibenn/static/css/InterVariable.woff2") format("woff2");
+  }
+  #cubox-react-root {
+    z-index: 99999999999;
+    position: relative;
+  }
+  </style><style type="text/css">
+      .cubox-extension-helper-button {
+        position: absolute !important;
+        display: none;
+        width: 26px !important;
+        height: 26px !important;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #C6C6C6;
+        border-radius: 6px !important;
+        background: #fff !important;
+        z-index: 99999999999999999999 !important;
+        cursor: pointer;
+        filter: drop-shadow(1px 2px 8px rgba(0, 0, 0, 0.15));
+        transition: border-color .2s ease;
+      }
+      
+      .cubox-extension-helper-button:hover {
+        border-color: #636363;
+      }
+      
+      .cubox-extension-helper-button svg {
+        pointer-events: none;
+        opacity: .8 !important;
+        transition: opacity .2s ease;
+      }
+      
+      .cubox-extension-helper-button:hover svg {
+        opacity: 1 !important;
+      }    
+    </style><style type="text/css" data-framer-css="true"></style><style data-id="immersive-translate-input-injected-css">.immersive-translate-input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2147483647;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-<body class="framer-body-augiA20Il-framer-XfSBc">
-    <script async="" src="https://events.framer.com/script" data-fid="77f003144764d086159562aa17c2b4489333418dd094eebe8cc40f3955be35b0"></script>
+.immersive-translate-loading-spinner {
+  vertical-align: middle !important;
+  width: 10px !important;
+  height: 10px !important;
+  display: inline-block !important;
+  margin: 0 4px !important;
+  border: 2px rgba(221, 244, 255, 0.6) solid !important;
+  border-top: 2px rgba(0, 0, 0, 0.375) solid !important;
+  border-left: 2px rgba(0, 0, 0, 0.375) solid !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  -webkit-animation: immersive-translate-loading-animation 0.6s infinite linear !important;
+  animation: immersive-translate-loading-animation 0.6s infinite linear !important;
+}
+
+@-webkit-keyframes immersive-translate-loading-animation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@keyframes immersive-translate-loading-animation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+
+.immersive-translate-input-loading {
+  --loading-color: #f78fb6;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: block;
+  margin: 12px auto;
+  position: relative;
+  color: white;
+  left: -100px;
+  box-sizing: border-box;
+  animation: immersiveTranslateShadowRolling 1.5s linear infinite;
+}
+
+@keyframes immersiveTranslateShadowRolling {
+  0% {
+    box-shadow: 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+  }
+
+  12% {
+    box-shadow: 100px 0 var(--loading-color), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+  }
+
+  25% {
+    box-shadow: 110px 0 var(--loading-color), 100px 0 var(--loading-color), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+  }
+
+  36% {
+    box-shadow: 120px 0 var(--loading-color), 110px 0 var(--loading-color), 100px 0 var(--loading-color), 0px 0 rgba(255, 255, 255, 0);
+  }
+
+  50% {
+    box-shadow: 130px 0 var(--loading-color), 120px 0 var(--loading-color), 110px 0 var(--loading-color), 100px 0 var(--loading-color);
+  }
+
+  62% {
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 130px 0 var(--loading-color), 120px 0 var(--loading-color), 110px 0 var(--loading-color);
+  }
+
+  75% {
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 130px 0 var(--loading-color), 120px 0 var(--loading-color);
+  }
+
+  87% {
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 130px 0 var(--loading-color);
+  }
+
+  100% {
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0);
+  }
+}
+
+
+.immersive-translate-search-recomend {
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  position: relative;
+  font-size: 16px;
+}
+
+.immersive-translate-search-enhancement-en-title {
+  color: #4d5156;
+}
+
+/* dark */
+@media (prefers-color-scheme: dark) {
+  .immersive-translate-search-recomend {
+    border: 1px solid #3c4043;
+  }
+
+  .immersive-translate-close-action svg {
+    fill: #bdc1c6;
+  }
+
+  .immersive-translate-search-enhancement-en-title {
+    color: #bdc1c6;
+  }
+}
+
+
+.immersive-translate-search-settings {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+}
+
+.immersive-translate-search-recomend::before {
+  /* content: " "; */
+  /* width: 20px; */
+  /* height: 20px; */
+  /* top: 16px; */
+  /* position: absolute; */
+  /* background: center / contain url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAxlBMVEUAAADpTInqTIjpSofnSIfqS4nfS4XqS4nqTIjsTYnrTInqTIroS4jvQIDqTIn////+/v7rSYjpTIn8/v7uaZzrTIr9/f3wfansWJL88/b85e73qc39+/v3xNnylrvrVI/98fb62Obva5/8+fr76vH4y9zpSIj74e353Oj1ocTzm77xhK/veKbtYpjsXJTqU47oTInxjrXyh7L99fj40eH2ttH1udD3sc31ssz1rMnykLXucqPtbqD85e/1xdn2u9DzqcXrUY6FaJb8AAAADnRSTlMA34BgIM8Q37/fz7+/EGOHcVQAAAGhSURBVDjLhZPncuowEEZFTW7bXVU7xsYYTO/p7bb3f6lICIOYJOT4h7/VnFmvrBFjrF3/CR/SajBHswafctG0Qg3O8O0Xa8BZ6uw7eLjqr30SofCDVSkemMinfL1ecy20r5ygR5zz3ArcAqJExPTPKhDENEmS30Q9+yo4lEQkqVTiIEAHCT10xWERRdH0Bq0aCOPZNDV3s0xaYce1lHEoDHU8wEh3qRJypNcTAeKUIjgKMeGLDoRCLVLTVf+Ownj8Kk6H9HM6QXPgYjQSB0F00EJEu10ILQrs/QeP77BSSr0MzLOyuJJQbnUoOOIUI/A8EeJk9E4YUHUWiRyTVKGgQUB8/3e/NpdGlfI+FMQyWsCBWyz4A/ZyHXyiiz0Ne5aGZssoxRmcChw8/EFKQ5JwwkUo3FRT5yXS7q+Y/rHDZmFktzpGMvO+5QofA4FPpEmGw+EWRCFvnaof7Zhe8NuYSLR0xErKLThUSs8gnODh87ssy6438yzbLzxl012HS19vfCf3CNhnbWOL1eEsDda+gDPUvri8tSZzNFrwIZf1NmNvqC1I/t8j7nYAAAAASUVORK5CYII='); */
+}
+
+.immersive-translate-search-title {}
+
+.immersive-translate-search-title-wrapper {}
+
+.immersive-translate-search-time {
+  font-size: 12px;
+  margin: 4px 0 24px;
+  color: #70757a;
+}
+
+.immersive-translate-expand-items {
+  display: none;
+}
+
+.immersive-translate-search-more {
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.immersive-translate-modal {
+  display: none;
+  position: fixed;
+  z-index: 2147483647;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  font-size: 15px;
+}
+
+.immersive-translate-modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 40px 24px 24px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 270px;
+  font-family: system-ui, -apple-system, "Segoe UI", "Roboto", "Ubuntu",
+    "Cantarell", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  position: relative
+}
+
+.immersive-translate-modal .immersive-translate-modal-content-in-input {
+  max-width: 500px;
+}
+.immersive-translate-modal-content-in-input .immersive-translate-modal-body {
+  text-align: left;
+  max-height: unset;
+}
+
+.immersive-translate-modal-title {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333333;
+}
+
+.immersive-translate-modal-body {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333333;
+  word-break: break-all;
+  margin-top: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .immersive-translate-modal-body {
+    max-height: 250px;
+    overflow-y: auto;
+  }
+}
+
+.immersive-translate-close {
+  color: #666666;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.immersive-translate-close:hover,
+.immersive-translate-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.immersive-translate-modal-footer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.immersive-translate-btn {
+  width: fit-content;
+  color: #fff;
+  background-color: #ea4c89;
+  border: none;
+  font-size: 16px;
+  margin: 0 8px;
+  padding: 9px 30px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.immersive-translate-btn:hover {
+  background-color: #f082ac;
+}
+
+.immersive-translate-cancel-btn {
+  /* gray color */
+  background-color: rgb(89, 107, 120);
+}
+
+
+.immersive-translate-cancel-btn:hover {
+  background-color: hsl(205, 20%, 32%);
+}
+
+.immersive-translate-action-btn {
+  background-color: transparent;
+  color: #EA4C89;
+  border: 1px solid #EA4C89
+}
+
+.immersive-translate-btn svg {
+  margin-right: 5px;
+}
+
+.immersive-translate-link {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+  text-decoration: none;
+  color: #007bff;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, .1);
+}
+
+.immersive-translate-primary-link {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+  text-decoration: none;
+  color: #ea4c89;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, .1);
+}
+
+.immersive-translate-modal input[type="radio"] {
+  margin: 0 6px;
+  cursor: pointer;
+}
+
+.immersive-translate-modal label {
+  cursor: pointer;
+}
+
+.immersive-translate-close-action {
+  position: absolute;
+  top: 2px;
+  right: 0px;
+  cursor: pointer;
+}</style></head>
+
+<body class="CBR">
+    
 
     
     <!-- End of bodyStart -->
-    <div id="main" data-framer-hydrate-v2="{&quot;routeId&quot;:&quot;augiA20Il&quot;,&quot;localizationId&quot;:&quot;default&quot;,&quot;localeId&quot;:&quot;default&quot;}" data-framer-ssr-released-at="2023-12-19T13:06:04.152Z" data-framer-page-optimized-at="2023-12-24T07:14:27.525Z"><div class="framer-XfSBc framer-QHNm4" style="display: contents;"><div class="framer-72rtr7" style="min-height: 100vh; width: auto;"><a class="framer-1ecc72a framer-lux5qc" data-framer-name="Header Image" name="Header Image" href="./slideshow"><div data-framer-background-image-wrapper="true" style="position: absolute; border-radius: inherit; inset: 0px;"><img src="https://framerusercontent.com/images/XMwr8oRm9YvaQFXXmMEoHdFOs.jpg" alt="" srcset="https://framerusercontent.com/images/XMwr8oRm9YvaQFXXmMEoHdFOs.jpg?scale-down-to=512 512w, https://framerusercontent.com/images/XMwr8oRm9YvaQFXXmMEoHdFOs.jpg?scale-down-to=1024 1024w, https://framerusercontent.com/images/XMwr8oRm9YvaQFXXmMEoHdFOs.jpg 2000w" sizes="100vw" style="display: block; width: 100%; height: 100%; border-radius: inherit; object-position: center center; object-fit: cover; image-rendering: auto;"></div><div class="framer-1vq3bgi" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h1 class="framer-text" style="--font-selector: R0Y7SW50ZXItNzAw; --framer-font-family: &quot;Inter&quot;, &quot;Inter Placeholder&quot;, sans-serif; --framer-font-size: 105px; --framer-font-weight: 700; --framer-letter-spacing: -2px; --framer-text-alignment: center; --framer-text-color: rgb(255, 255, 255);">山河秀丽</h1></div><div class="framer-1hvomcv"></div><div class="framer-1sei93s" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: translateX(-50%);"><h2 class="framer-text" style="--font-selector: R0Y7SW50ZXItNTAw; --framer-font-size: 24px; --framer-font-weight: 500; --framer-letter-spacing: -0.5px; --framer-line-height: 1.5em; --framer-text-alignment: center; --framer-text-color: rgba(255, 255, 255, 0.6);"><span class="framer-text" style="--framer-font-size: 27px;">——</span><span class="framer-text" style="--framer-font-size: 27px;"><br class="framer-text"></span><span class="framer-text" style="--framer-font-size: 27px;">/这里是陈伯睿的个人主页/</span></h2></div></a><div class="framer-61np4" data-framer-name="Testimonials" name="Testimonials"><div class="framer-1btzwmv"><a class="framer-1ityz1z framer-lux5qc" data-framer-name="Card" name="Card" href="./page"><div class="framer-wkf9ma"><div class="framer-17v5exn"><div data-framer-background-image-wrapper="true" style="position: absolute; border-radius: inherit; inset: 0px;"><img src="https://framerusercontent.com/images/vAkUrMuRmZ5Ee4gFNO4gOMJDpDc.webp" alt="" style="display: block; width: 100%; height: 100%; border-radius: inherit; object-position: center center; object-fit: cover; image-rendering: auto;"></div></div><div class="framer-42c3fj"><div class="framer-axsxz2" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h3 class="framer-text" style="--font-selector: R0Y7SW50ZXItNjAw; --framer-font-size: 20px; --framer-font-weight: 600; --framer-letter-spacing: -0.5px; --framer-line-height: 1.4em; --framer-text-alignment: left; --framer-text-color: var(--token-b9c3c957-2c66-49c4-9732-fa196fddac20, rgb(0, 17, 34));">关于我</h3></div><div class="framer-e9fa5k" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><p class="framer-text" style="--font-selector: R0Y7SW50ZXItNTAw; --framer-font-size: 14px; --framer-font-weight: 500; --framer-line-height: 1.5em; --framer-text-alignment: left; --framer-text-color: var(--token-fb4b67b5-91ba-4b73-b4a6-f55417ea1c0c, rgb(102, 102, 102));">@陈伯睿</p></div></div></div><div class="framer-9osmd2" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><p class="framer-text" style="--font-selector: R0Y7SW50ZXItNTAw; --framer-font-weight: 500; --framer-line-height: 1.6em; --framer-text-alignment: left; --framer-text-color: rgb(102, 102, 102);">我是陈伯睿，热爱电脑，爱搞机。喜欢研究电脑、手机，喜爱剪视频，10后，某站超级不知名UP主。谢谢！</p></div></a></div></div><div class="framer-94n9ue" data-framer-name="Features" name="Features"><div class="framer-r5c2o8" data-framer-name="Features" name="Features"><div class="framer-ms15wx"><div class="framer-qmjya1 hidden-1icmobi" data-framer-name="Image" name="Image"><div data-framer-background-image-wrapper="true" style="position: absolute; border-radius: inherit; inset: 0px;"><img src="https://framerusercontent.com/images/qHtnUm3pYrEIBUJU2mvEvk2xU0.png" alt="" srcset="https://framerusercontent.com/images/qHtnUm3pYrEIBUJU2mvEvk2xU0.png?scale-down-to=512 512w, https://framerusercontent.com/images/qHtnUm3pYrEIBUJU2mvEvk2xU0.png?scale-down-to=1024 1024w, https://framerusercontent.com/images/qHtnUm3pYrEIBUJU2mvEvk2xU0.png?scale-down-to=2048 2048w, https://framerusercontent.com/images/qHtnUm3pYrEIBUJU2mvEvk2xU0.png?scale-down-to=4096 4096w, https://framerusercontent.com/images/qHtnUm3pYrEIBUJU2mvEvk2xU0.png 4400w" sizes="320px" loading="lazy" style="display: block; width: 100%; height: 100%; border-radius: inherit; object-position: center center; object-fit: cover; image-rendering: auto;"></div></div><div class="framer-1gx8uqh" data-framer-name="Content" name="Content"><div class="framer-1qdstu2" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h1 class="framer-text" style="--font-selector: R0Y7SW50ZXItNzAw; --framer-font-family: &quot;Inter&quot;, &quot;Inter Placeholder&quot;, sans-serif; --framer-font-size: 50px; --framer-font-weight: 700; --framer-letter-spacing: -2.1px; --framer-text-alignment: left; --framer-text-color: var(--token-b9c3c957-2c66-49c4-9732-fa196fddac20, rgb(0, 17, 34));">CBR工具箱</h1></div><div class="framer-r6i8vh" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h1 class="framer-text" style="--font-selector: R0Y7SW50ZXItNzAw; --framer-font-family: &quot;Inter&quot;, &quot;Inter Placeholder&quot;, sans-serif; --framer-font-size: 50px; --framer-font-weight: 700; --framer-letter-spacing: -2.1px; --framer-text-alignment: left; --framer-text-color: var(--token-b9c3c957-2c66-49c4-9732-fa196fddac20, rgb(0, 17, 34));">我的作品</h1></div><div class="framer-15xjl8w hidden-1icmobi" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h2 class="framer-text" style="--font-selector: R0Y7SW50ZXItNTAw; --framer-font-size: 24px; --framer-font-weight: 500; --framer-letter-spacing: -0.5px; --framer-line-height: 1.5em; --framer-text-alignment: left; --framer-text-color: rgb(136, 136, 136);">简洁、轻快、实用的多功能工具箱。</h2></div><a class="framer-q4nssq framer-lux5qc" data-framer-name="Button" data-reset="button" name="Button" href="https://www.cdbnr.top/gjx.html" rel="noopener"><div class="framer-1getkn2" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><p class="framer-text" style="--font-selector: R0Y7SW50ZXItNjAw; --framer-font-size: 14px; --framer-font-weight: 600; --framer-text-alignment: center; --framer-text-color: rgb(255, 255, 255);">Read More</p></div></a></div></div><div class="framer-180q8hx"><div class="framer-18q6pj9 hidden-1icmobi" data-framer-name="Image" name="Image"><div data-framer-background-image-wrapper="true" style="position: absolute; border-radius: inherit; inset: 0px;"><img src="https://framerusercontent.com/images/q290OrbJExbOQpEe95KYGSIgY.jpg" alt="" srcset="https://framerusercontent.com/images/q290OrbJExbOQpEe95KYGSIgY.jpg?scale-down-to=512 512w, https://framerusercontent.com/images/q290OrbJExbOQpEe95KYGSIgY.jpg?scale-down-to=1024 1024w, https://framerusercontent.com/images/q290OrbJExbOQpEe95KYGSIgY.jpg 1200w" sizes="320px" loading="lazy" style="display: block; width: 100%; height: 100%; border-radius: inherit; object-position: center center; object-fit: cover; image-rendering: auto;"></div></div><div class="framer-sogz7x" data-framer-name="Content" name="Content"><div class="framer-rl2os" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h1 class="framer-text" style="--font-selector: R0Y7SW50ZXItNzAw; --framer-font-family: &quot;Inter&quot;, &quot;Inter Placeholder&quot;, sans-serif; --framer-font-size: 50px; --framer-font-weight: 700; --framer-letter-spacing: -2.1px; --framer-text-alignment: left; --framer-text-color: var(--token-b9c3c957-2c66-49c4-9732-fa196fddac20, rgb(0, 17, 34));">PU插件</h1></div><div class="framer-1t2o0fz hidden-1icmobi" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h2 class="framer-text" style="--font-selector: R0Y7SW50ZXItNTAw; --framer-font-size: 24px; --framer-font-weight: 500; --framer-letter-spacing: -0.5px; --framer-line-height: 1.5em; --framer-text-alignment: left; --framer-text-color: rgb(136, 136, 136);">做PPT的各种问题，痛苦都让他迎刃而解。</h2></div><a class="framer-dyxj1a framer-lux5qc" data-framer-name="Button" data-reset="button" name="Button" href="https://www.cdbnr.top/pu.html" rel="noopener"><div class="framer-1vss6k0" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><p class="framer-text" style="--font-selector: R0Y7SW50ZXItNjAw; --framer-font-size: 14px; --framer-font-weight: 600; --framer-text-alignment: center; --framer-text-color: rgb(255, 255, 255);">Read More</p></div></a></div></div><div class="framer-cze0fz"><div class="framer-3ccivr hidden-1icmobi" data-framer-name="Image" name="Image"><div data-framer-background-image-wrapper="true" style="position: absolute; border-radius: inherit; inset: 0px;"><img src="https://framerusercontent.com/images/dOPAp2VTrOrfD0aSpuvkj8xLpfo.png" alt="" srcset="https://framerusercontent.com/images/dOPAp2VTrOrfD0aSpuvkj8xLpfo.png?scale-down-to=512 512w, https://framerusercontent.com/images/dOPAp2VTrOrfD0aSpuvkj8xLpfo.png?scale-down-to=1024 1024w, https://framerusercontent.com/images/dOPAp2VTrOrfD0aSpuvkj8xLpfo.png 1104w" sizes="320px" loading="lazy" style="display: block; width: 100%; height: 100%; border-radius: inherit; object-position: center center; object-fit: cover; image-rendering: auto;"></div></div><div class="framer-2w1vuk" data-framer-name="Content" name="Content"><div class="framer-t4bqwq" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h1 class="framer-text" style="--font-selector: R0Y7SW50ZXItNzAw; --framer-font-family: &quot;Inter&quot;, &quot;Inter Placeholder&quot;, sans-serif; --framer-font-size: 50px; --framer-font-weight: 700; --framer-letter-spacing: -2.1px; --framer-text-alignment: left; --framer-text-color: var(--token-b9c3c957-2c66-49c4-9732-fa196fddac20, rgb(0, 17, 34));">陈伯睿起始页</h1></div><div class="framer-1q1wwxw hidden-1icmobi" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h2 class="framer-text" style="--font-selector: R0Y7SW50ZXItNTAw; --framer-font-size: 24px; --framer-font-weight: 500; --framer-letter-spacing: -0.5px; --framer-line-height: 1.5em; --framer-text-alignment: left; --framer-text-color: rgb(136, 136, 136);">开始工作，打开起始页，让你的心情舒服百倍。</h2></div><a class="framer-1i21e5x framer-lux5qc" data-framer-name="Button" data-reset="button" name="Button" href="https://zgmz.github.io/" rel="noopener"><div class="framer-1ydrpg6" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><p class="framer-text" style="--font-selector: R0Y7SW50ZXItNjAw; --framer-font-size: 14px; --framer-font-weight: 600; --framer-text-alignment: center; --framer-text-color: rgb(255, 255, 255);">Read More</p></div></a></div></div></div></div><div class="framer-tzjgjk" data-framer-name="Text" name="Text"><div class="framer-1nxc31d" data-framer-name="Hard Light" name="Hard Light"><div class="framer-7h5zi5-container"><div class="framer-xIUJb framer-v-1azs8x" tabindex="0" style="display: contents;"><div class="framer-1d4efzn" data-framer-name="Squiggle 10" style="height: 100%; width: 100%; opacity: 1;"><div class="framer-1wnu5xw" data-framer-name="Squiggle 10" style="opacity: 1;"><div data-framer-background-image-wrapper="true" style="position: absolute; border-radius: inherit; inset: 0px;"><img src="https://framerusercontent.com/images/kfWSF57EyzLKk5aYkjtlnyggxKU.png" alt="" srcset="https://framerusercontent.com/images/kfWSF57EyzLKk5aYkjtlnyggxKU.png?scale-down-to=512 512w, https://framerusercontent.com/images/kfWSF57EyzLKk5aYkjtlnyggxKU.png?scale-down-to=1024 1024w, https://framerusercontent.com/images/kfWSF57EyzLKk5aYkjtlnyggxKU.png 1600w" sizes="800px" style="display: block; width: 100%; height: 100%; border-radius: inherit; object-position: center center; object-fit: cover; image-rendering: auto;"></div></div></div></div></div></div><div class="framer-pw25ff"><div class="framer-h9m1w5"><div class="framer-1ibcaql" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h2 class="framer-text" style="--font-selector: R0Y7TWFyZ2FyaW5lLXJlZ3VsYXI=; --framer-font-family: &quot;Margarine&quot;, sans-serif; --framer-font-size: 48px; --framer-line-height: 1.5em; --framer-text-alignment: left; --framer-text-color: rgb(47, 69, 80);">联系方式</h2></div><div class="framer-h7o0ez" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><div class="framer-text framer-styles-preset-zzer2x" data-styles-preset="hUaywgC0g" style="--framer-text-color: rgb(0, 0, 0);">联系方式：13472858392        邮箱：csbprd@outlook.com</div></div></div></div></div></div><div id="overlay"></div></div></div><div id="svg-templates" style="position: absolute; overflow: hidden; top: 0; left: 0; width: 0; height: 0">
+    <div id="main" data-framer-hydrate-v2="{&quot;routeId&quot;:&quot;augiA20Il&quot;,&quot;localizationId&quot;:&quot;default&quot;,&quot;localeId&quot;:&quot;default&quot;}" data-framer-ssr-released-at="2023-12-19T13:06:04.152Z" data-framer-page-optimized-at="2023-12-24T07:14:27.525Z"><div class="framer-XfSBc framer-QHNm4" style="display: contents;"><div class="framer-72rtr7" style="min-height: 100vh; width: auto;"><a class="framer-1ecc72a framer-lux5qc" data-framer-name="Header Image" name="Header Image" href="./slideshow"><div data-framer-background-image-wrapper="true" style="position: absolute; border-radius: inherit; inset: 0px;"><img src="https://framerusercontent.com/images/XMwr8oRm9YvaQFXXmMEoHdFOs.jpg" alt="" srcset="https://framerusercontent.com/images/XMwr8oRm9YvaQFXXmMEoHdFOs.jpg?scale-down-to=512 512w, https://framerusercontent.com/images/XMwr8oRm9YvaQFXXmMEoHdFOs.jpg?scale-down-to=1024 1024w, https://framerusercontent.com/images/XMwr8oRm9YvaQFXXmMEoHdFOs.jpg 2000w" sizes="100vw" style="display: block; width: 100%; height: 100%; border-radius: inherit; object-position: center center; object-fit: cover; image-rendering: auto;"></div><div class="framer-1vq3bgi" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h1 class="framer-text" style="--font-selector: R0Y7SW50ZXItNzAw; --framer-font-family: &quot;Inter&quot;, &quot;Inter Placeholder&quot;, sans-serif; --framer-font-size: 105px; --framer-font-weight: 700; --framer-letter-spacing: -2px; --framer-text-alignment: center; --framer-text-color: rgb(255, 255, 255);">山河秀丽</h1></div><div class="framer-1hvomcv"></div><div class="framer-1sei93s" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: translateX(-50%);"><h2 class="framer-text" style="--font-selector: R0Y7SW50ZXItNTAw; --framer-font-size: 24px; --framer-font-weight: 500; --framer-letter-spacing: -0.5px; --framer-line-height: 1.5em; --framer-text-alignment: center; --framer-text-color: rgba(255, 255, 255, 0.6);"><span class="framer-text" style="--framer-font-size: 27px;">——</span><span class="framer-text" style="--framer-font-size: 27px;"><br class="framer-text"></span><span class="framer-text" style="--framer-font-size: 27px;">/这里是陈伯睿的个人主页/</span></h2></div></a><div class="framer-61np4" data-framer-name="Testimonials" name="Testimonials"><div class="framer-1btzwmv"><a class="framer-1ityz1z framer-lux5qc" data-framer-name="Card" name="Card" href="./page"><div class="framer-wkf9ma"><div class="framer-17v5exn"><div data-framer-background-image-wrapper="true" style="position: absolute; border-radius: inherit; inset: 0px;"><img src="https://framerusercontent.com/images/vAkUrMuRmZ5Ee4gFNO4gOMJDpDc.webp" alt="" style="display: block; width: 100%; height: 100%; border-radius: inherit; object-position: center center; object-fit: cover; image-rendering: auto;"></div></div><div class="framer-42c3fj"><div class="framer-axsxz2" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h3 class="framer-text" style="--font-selector: R0Y7SW50ZXItNjAw; --framer-font-size: 20px; --framer-font-weight: 600; --framer-letter-spacing: -0.5px; --framer-line-height: 1.4em; --framer-text-alignment: left; --framer-text-color: var(--token-b9c3c957-2c66-49c4-9732-fa196fddac20, rgb(0, 17, 34));">关于我</h3></div><div class="framer-e9fa5k" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><p class="framer-text" style="--font-selector: R0Y7SW50ZXItNTAw; --framer-font-size: 14px; --framer-font-weight: 500; --framer-line-height: 1.5em; --framer-text-alignment: left; --framer-text-color: var(--token-fb4b67b5-91ba-4b73-b4a6-f55417ea1c0c, rgb(102, 102, 102));">@陈伯睿</p></div></div></div><div class="framer-9osmd2" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><p class="framer-text" style="--font-selector: R0Y7SW50ZXItNTAw; --framer-font-weight: 500; --framer-line-height: 1.6em; --framer-text-alignment: left; --framer-text-color: rgb(102, 102, 102);">我是陈伯睿，热爱电脑，爱搞机，喜爱剪视频，某站超级不知名UP主。谢谢！</p></div></a></div></div><div class="framer-94n9ue" data-framer-name="Features" name="Features"><div class="framer-r5c2o8" data-framer-name="Features" name="Features"><div class="framer-ms15wx"><div class="framer-qmjya1 hidden-1icmobi" data-framer-name="Image" name="Image"><div data-framer-background-image-wrapper="true" style="position: absolute; border-radius: inherit; inset: 0px;"><img src="https://framerusercontent.com/images/qHtnUm3pYrEIBUJU2mvEvk2xU0.png" alt="" srcset="https://framerusercontent.com/images/qHtnUm3pYrEIBUJU2mvEvk2xU0.png?scale-down-to=512 512w, https://framerusercontent.com/images/qHtnUm3pYrEIBUJU2mvEvk2xU0.png?scale-down-to=1024 1024w, https://framerusercontent.com/images/qHtnUm3pYrEIBUJU2mvEvk2xU0.png?scale-down-to=2048 2048w, https://framerusercontent.com/images/qHtnUm3pYrEIBUJU2mvEvk2xU0.png?scale-down-to=4096 4096w, https://framerusercontent.com/images/qHtnUm3pYrEIBUJU2mvEvk2xU0.png 4400w" sizes="320px" loading="lazy" style="display: block; width: 100%; height: 100%; border-radius: inherit; object-position: center center; object-fit: cover; image-rendering: auto;"></div></div><div class="framer-1gx8uqh" data-framer-name="Content" name="Content"><div class="framer-1qdstu2" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h1 class="framer-text" style="--font-selector: R0Y7SW50ZXItNzAw; --framer-font-family: &quot;Inter&quot;, &quot;Inter Placeholder&quot;, sans-serif; --framer-font-size: 50px; --framer-font-weight: 700; --framer-letter-spacing: -2.1px; --framer-text-alignment: left; --framer-text-color: var(--token-b9c3c957-2c66-49c4-9732-fa196fddac20, rgb(0, 17, 34));">CBR工具箱</h1></div><div class="framer-r6i8vh" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h1 class="framer-text" style="--font-selector: R0Y7SW50ZXItNzAw; --framer-font-family: &quot;Inter&quot;, &quot;Inter Placeholder&quot;, sans-serif; --framer-font-size: 50px; --framer-font-weight: 700; --framer-letter-spacing: -2.1px; --framer-text-alignment: left; --framer-text-color: var(--token-b9c3c957-2c66-49c4-9732-fa196fddac20, rgb(0, 17, 34));">我的作品</h1></div><div class="framer-15xjl8w hidden-1icmobi" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h2 class="framer-text" style="--font-selector: R0Y7SW50ZXItNTAw; --framer-font-size: 24px; --framer-font-weight: 500; --framer-letter-spacing: -0.5px; --framer-line-height: 1.5em; --framer-text-alignment: left; --framer-text-color: rgb(136, 136, 136);">简洁、轻快、实用的多功能工具箱。</h2></div><a class="framer-q4nssq framer-lux5qc" data-framer-name="Button" data-reset="button" name="Button" href="https://www.csbprd.top/gjx.html" rel="noopener"><div class="framer-1getkn2" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><p class="framer-text" style="--font-selector: R0Y7SW50ZXItNjAw; --framer-font-size: 14px; --framer-font-weight: 600; --framer-text-alignment: center; --framer-text-color: rgb(255, 255, 255);">Read More</p></div></a></div></div><div class="framer-180q8hx"><div class="framer-18q6pj9 hidden-1icmobi" data-framer-name="Image" name="Image"><div data-framer-background-image-wrapper="true" style="position: absolute; border-radius: inherit; inset: 0px;"><img src="https://framerusercontent.com/images/q290OrbJExbOQpEe95KYGSIgY.jpg" alt="" srcset="https://framerusercontent.com/images/q290OrbJExbOQpEe95KYGSIgY.jpg?scale-down-to=512 512w, https://framerusercontent.com/images/q290OrbJExbOQpEe95KYGSIgY.jpg?scale-down-to=1024 1024w, https://framerusercontent.com/images/q290OrbJExbOQpEe95KYGSIgY.jpg 1200w" sizes="320px" loading="lazy" style="display: block; width: 100%; height: 100%; border-radius: inherit; object-position: center center; object-fit: cover; image-rendering: auto;"></div></div><div class="framer-sogz7x" data-framer-name="Content" name="Content"><div class="framer-rl2os" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h1 class="framer-text" style="--font-selector: R0Y7SW50ZXItNzAw; --framer-font-family: &quot;Inter&quot;, &quot;Inter Placeholder&quot;, sans-serif; --framer-font-size: 50px; --framer-font-weight: 700; --framer-letter-spacing: -2.1px; --framer-text-alignment: left; --framer-text-color: var(--token-b9c3c957-2c66-49c4-9732-fa196fddac20, rgb(0, 17, 34));">PU插件</h1></div><div class="framer-1t2o0fz hidden-1icmobi" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h2 class="framer-text" style="--font-selector: R0Y7SW50ZXItNTAw; --framer-font-size: 24px; --framer-font-weight: 500; --framer-letter-spacing: -0.5px; --framer-line-height: 1.5em; --framer-text-alignment: left; --framer-text-color: rgb(136, 136, 136);">做PPT的各种问题，痛苦都让他迎刃而解。</h2></div><a class="framer-dyxj1a framer-lux5qc" data-framer-name="Button" data-reset="button" name="Button" href="https://www.csbprd.top/pu.html" rel="noopener"><div class="framer-1vss6k0" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><p class="framer-text" style="--font-selector: R0Y7SW50ZXItNjAw; --framer-font-size: 14px; --framer-font-weight: 600; --framer-text-alignment: center; --framer-text-color: rgb(255, 255, 255);">Read More</p></div></a></div></div><div class="framer-cze0fz"><div class="framer-3ccivr hidden-1icmobi" data-framer-name="Image" name="Image"><div data-framer-background-image-wrapper="true" style="position: absolute; border-radius: inherit; inset: 0px;"><img src="https://framerusercontent.com/images/dOPAp2VTrOrfD0aSpuvkj8xLpfo.png" alt="" srcset="https://framerusercontent.com/images/dOPAp2VTrOrfD0aSpuvkj8xLpfo.png?scale-down-to=512 512w, https://framerusercontent.com/images/dOPAp2VTrOrfD0aSpuvkj8xLpfo.png?scale-down-to=1024 1024w, https://framerusercontent.com/images/dOPAp2VTrOrfD0aSpuvkj8xLpfo.png 1104w" sizes="320px" loading="lazy" style="display: block; width: 100%; height: 100%; border-radius: inherit; object-position: center center; object-fit: cover; image-rendering: auto;"></div></div><div class="framer-2w1vuk" data-framer-name="Content" name="Content"><div class="framer-t4bqwq" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h1 class="framer-text" style="--font-selector: R0Y7SW50ZXItNzAw; --framer-font-family: &quot;Inter&quot;, &quot;Inter Placeholder&quot;, sans-serif; --framer-font-size: 50px; --framer-font-weight: 700; --framer-letter-spacing: -2.1px; --framer-text-alignment: left; --framer-text-color: var(--token-b9c3c957-2c66-49c4-9732-fa196fddac20, rgb(0, 17, 34));">ZGMZ起始页</h1></div><div class="framer-1q1wwxw hidden-1icmobi" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h2 class="framer-text" style="--font-selector: R0Y7SW50ZXItNTAw; --framer-font-size: 24px; --framer-font-weight: 500; --framer-letter-spacing: -0.5px; --framer-line-height: 1.5em; --framer-text-alignment: left; --framer-text-color: rgb(136, 136, 136);">开始工作，打开起始页，让你的心情舒服百倍。</h2></div><a class="framer-1i21e5x framer-lux5qc" data-framer-name="Button" data-reset="button" name="Button" href="https://csbprd.top/zgmz.html" rel="noopener"><div class="framer-1ydrpg6" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><p class="framer-text" style="--font-selector: R0Y7SW50ZXItNjAw; --framer-font-size: 14px; --framer-font-weight: 600; --framer-text-alignment: center; --framer-text-color: rgb(255, 255, 255);">Read More</p></div></a></div></div></div></div><div class="framer-tzjgjk" data-framer-name="Text" name="Text"><div class="framer-1nxc31d" data-framer-name="Hard Light" name="Hard Light"><div class="framer-7h5zi5-container"><div class="framer-xIUJb framer-v-1azs8x" tabindex="0" style="display: contents;"><div class="framer-1d4efzn" data-framer-name="Squiggle 10" style="height: 100%; width: 100%; opacity: 1;"><div class="framer-1wnu5xw" data-framer-name="Squiggle 10" style="opacity: 1;"><div data-framer-background-image-wrapper="true" style="position: absolute; border-radius: inherit; inset: 0px;"><img src="https://framerusercontent.com/images/kfWSF57EyzLKk5aYkjtlnyggxKU.png" alt="" srcset="https://framerusercontent.com/images/kfWSF57EyzLKk5aYkjtlnyggxKU.png?scale-down-to=512 512w, https://framerusercontent.com/images/kfWSF57EyzLKk5aYkjtlnyggxKU.png?scale-down-to=1024 1024w, https://framerusercontent.com/images/kfWSF57EyzLKk5aYkjtlnyggxKU.png 1600w" sizes="800px" style="display: block; width: 100%; height: 100%; border-radius: inherit; object-position: center center; object-fit: cover; image-rendering: auto;"></div></div></div></div></div></div><div class="framer-pw25ff"><div class="framer-h9m1w5"><div class="framer-1ibcaql" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><h2 class="framer-text" style="--font-selector: R0Y7TWFyZ2FyaW5lLXJlZ3VsYXI=; --framer-font-family: &quot;Margarine&quot;, sans-serif; --framer-font-size: 32px; --framer-line-height: 1.5em; --framer-text-alignment: left; --framer-text-color: rgb(47, 69, 80);">联系方式</h2></div><div class="framer-h7o0ez" data-framer-component-type="RichTextContainer" style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; transform: none;"><div class="framer-text framer-styles-preset-zzer2x" data-styles-preset="hUaywgC0g" style="--framer-text-color: rgb(0, 0, 0);">联系方式：13472858392        邮箱：csbprd@outlook.com</div></div></div></div></div></div><div id="overlay"></div></div></div><div id="svg-templates" style="position: absolute; overflow: hidden; top: 0; left: 0; width: 0; height: 0">
 </div>
     
     <script data-framer-appear-animation="no-preference"></script>
@@ -74,6 +435,20 @@
 
 
 <script src="chrome-extension://cdnlggbebabeoneeglhadpagegmflmbc/aiscripts/scriptBus.js"></script><span id="cnki_grabber" data-id="1703402664000" style="visibility: hidden;"></span><script></script><div>
+    
+  </div>
+
+<script src="chrome-extension://cdnlggbebabeoneeglhadpagegmflmbc/content/start_scriptBus.js"></script><div id="fatkun-drop-panel" style="opacity: 0; top: -1e+07px; left: 0px; transform: scale(1);">
+    <a id="fatkun-drop-panel-close-btn">×</a>
+        <div id="fatkun-drop-panel-inner">
+            <div class="fatkun-content">
+                <svg class="fatkun-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5892"><path d="M494.933333 782.933333c2.133333 2.133333 4.266667 4.266667 8.533334 6.4h8.533333c6.4 0 10.666667-2.133333 14.933333-6.4l2.133334-2.133333 275.2-275.2c8.533333-8.533333 8.533333-21.333333 0-29.866667-8.533333-8.533333-21.333333-8.533333-29.866667 0L533.333333 716.8V128c0-12.8-8.533333-21.333333-21.333333-21.333333s-21.333333 8.533333-21.333333 21.333333v588.8L249.6 475.733333c-8.533333-8.533333-21.333333-8.533333-29.866667 0-8.533333 8.533333-8.533333 21.333333 0 29.866667l275.2 277.333333zM853.333333 874.666667H172.8c-12.8 0-21.333333 8.533333-21.333333 21.333333s8.533333 21.333333 21.333333 21.333333H853.333333c12.8 0 21.333333-8.533333 21.333334-21.333333s-10.666667-21.333333-21.333334-21.333333z" p-id="5893"></path></svg>
+                <div class="fatkun-title">拖拽到此处完成下载</div>
+                <div class="fatkun-desc">图片将完成下载</div>
+            </div>
+            <div id="fatkun-supported-by">AIX智能下载器</div>
+        </div>
+    </div><script src="chrome-extension://cdnlggbebabeoneeglhadpagegmflmbc/content/scriptBus.js"></script><script></script></body><div id="cubox-react-root"></div><div>
     <div class="cubox-extension-helper-button" style="display: none;">
 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_1219_9015)">
@@ -94,5 +469,4 @@
 </defs>
 </svg>
     </div>
-  </div>
-</body></html>
+  </div></html>
