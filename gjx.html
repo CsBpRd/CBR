@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBR工具箱 - 清爽界面，灵动随心</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* 深色主题默认值 */
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #60a5fa;
+            --border-color: #334155;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #e2e8f0;
+            --bg-card: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --accent-primary: #2563eb;
+            --accent-secondary: #3b82f6;
+            --border-color: #cbd5e1;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* 主题切换按钮 */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* 导航栏 */
+        nav {
+            background: var(--bg-secondary);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-primary);
+        }
+
+        /* 英雄区域 */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(96, 165, 250, 0.1));
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-primary);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--text-secondary);
+        }
+
+        /* 功能亮点区域 */
+        .features {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent-primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+        }
+
+        /* 网格功能 */
+        .grid-features {
+            max-width: 1200px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-item {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .grid-icon {
+            font-size: 2rem;
+            color: var(--accent-primary);
+            margin-bottom: 15px;
+        }
+
+        .grid-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .grid-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* 下载区域 */
+        .download-section {
+            max-width: 1200px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .download-box {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .download-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .download-description {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn:after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(30deg);
+            transition: all 0.8s;
+        }
+
+        .btn:hover:after {
+            left: 120%;
+        }
+
+        /* 底部 */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: var(--bg-secondary);
+            margin-top: 50px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-primary);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+        }
+
+        .social-link:hover {
+            background: var(--accent-primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 主题切换按钮 -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">CSBPRD</a>
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="gjx.html" class="active">CBR工具箱</a>
+                <a href="pu.html">PU插件</a>
+                <a href="zgmz.html">ZGMZ起始页</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <h1>CBR工具箱</h1>
+        <p>清爽界面，灵动随心</p>
+        <a href="#download" class="btn">立即体验 <i class="fas fa-play"></i></a>
+    </section>
+
+    <!-- 功能亮点区域 -->
+    <section id="features" class="features">
+        <h2 class="section-title">功能亮点</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-th-large"></i>
+                </div>
+                <h3 class="feature-title">工具数量多</h3>
+                <p class="feature-description">提供更多工具，满足你的各种需求。页面简洁清爽，能有效提升你的效率。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3 class="feature-title">快速处理</h3>
+                <p class="feature-description">优化的处理引擎，让各种操作更加快速高效，节省宝贵时间。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 网格功能 -->
+    <section class="grid-features">
+        <h2 class="section-title">具体功能</h2>
+        <div class="grid-container">
+            <div class="grid-item">
+                <div class="grid-icon">
+                    <i class="fas fa-shapes"></i>
+                </div>
+                <h3 class="grid-title">形状制作</h3>
+                <p class="grid-description">一键生成特殊形状</p>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-icon">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <h3 class="grid-title">插画制作</h3>
+                <p class="grid-description">制作好看的插画</p>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3 class="grid-title">视频查找</h3>
+                <p class="grid-description">高清视频一键搜索</p>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-icon">
+                    <i class="fas fa-hand-point-up"></i>
+                </div>
+                <h3 class="grid-title">手指制作</h3>
+                <p class="grid-description">3D手指一键生成</p>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3 class="grid-title">每日壁纸</h3>
+                <p class="grid-description">每日更新高质量壁纸</p>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h3 class="grid-title">配色选择</h3>
+                <p class="grid-description">提供配色方案选择</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 下载区域 -->
+    <section id="download" class="download-section">
+        <div class="download-box">
+            <h2 class="download-title">立即体验CBR工具箱</h2>
+            <p class="download-description">清爽界面，功能强大，让你的工作更加高效</p>
+            <a href="./install.msi" class="btn" download>
+                <i class="fas fa-download"></i> 立即下载 (Windows)
+            </a>
+            <p style="margin-top: 20px; color: var(--text-secondary); font-size: 0.9rem;">
+                文件大小: 31.2 MB | 支持系统: Windows 7+ | 版本: v5.0.0
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://space.bilibili.com/627003864" class="social-link" target="_blank">
+                <i class="fab fa-bilibili"></i>
+            </a>
+            <a href="https://https://github.com/CsBpRd" class="social-link" target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:csbprd@outlook.com" class="social-link">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        <p>&copy; 2026 陈伯睿个人主页 | CSBPRD.TOP</p>
+        <p>让技术创造美好生活</p>
+    </footer>
+
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+        
+        // 检查本地存储中的主题偏好
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        htmlElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+        
+        function updateThemeIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            if (theme === 'dark') {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        }
+    </script>
+</body>
+</html>
