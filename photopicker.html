@@ -52,10 +52,36 @@
             z-index: 100;
         }
 
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
         .header-title {
             font-size: 15px;
             font-weight: 600;
             color: var(--primary);
+        }
+
+        .header-macos-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            background: var(--hover-bg);
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .header-macos-link:hover {
+            background: var(--secondary);
+            color: white;
         }
 
         .header-steps {
@@ -522,7 +548,13 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="header-title">照片筛选工具</div>
+        <div class="header-left">
+            <div class="header-title">照片筛选工具</div>
+            <a class="header-macos-link" href="https://github.com/CsBpRd/photo-picker/releases/download/v0.1.0/Photo.Picker_0.1.0_x64.dmg" target="_blank">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8.75 1.75a.75.75 0 0 0-1.5 0v.566l-.266-.074A6.75 6.75 0 0 0 .5 8.25c0 1.75.625 3.353 1.664 4.596l.067.079.266.265.266-.265.067-.079A6.72 6.72 0 0 0 4.579 8.5H6.75v4.75a.75.75 0 0 0 1.5 0V8.5h2.171a6.72 6.72 0 0 0 1.715 4.246l.067.079.266.265.266-.265.067-.079A6.72 6.72 0 0 0 15.5 8.25a6.75 6.75 0 0 0-5.734-6.008L9.25 2.069V1.75zm-1.5 1.614v3.136h-2.35a5.22 5.22 0 0 1 .972-3.136h1.378zm1.5 0h1.378a5.22 5.22 0 0 1 .972 3.136H8.75V3.364z"/></svg>
+                下载 macOS 版
+            </a>
+        </div>
         <div class="header-steps">
             <div class="step active" id="step1">导入照片</div>
             <span class="step-arrow">›</span>
