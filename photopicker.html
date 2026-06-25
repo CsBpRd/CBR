@@ -443,10 +443,11 @@
       text-overflow: ellipsis;
     }
 
-    /* Sentinel for infinite scroll */
+    /* Sentinel for infinite scroll — placed outside the grid, inside scroll container */
     .scroll-sentinel {
       width: 100%;
       height: 1px;
+      pointer-events: none;
     }
 
     /* Preview Modal */
@@ -661,6 +662,243 @@
     .photo-grid-container::-webkit-scrollbar-thumb:hover {
       background: #A1A1AA;
     }
+
+    /* ===== AI 建议 UI 样式 ===== */
+    /* AI 开关按钮 */
+    .ai-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      color: var(--text-secondary);
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .ai-toggle:hover {
+      border-color: #A78BFA;
+      color: #7C3AED;
+      background: #FAF5FF;
+    }
+
+    .ai-toggle.active {
+      background: linear-gradient(135deg, #7C3AED, #A855F7);
+      color: var(--white);
+      border-color: transparent;
+      box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+    }
+
+    .ai-toggle.active:hover {
+      background: linear-gradient(135deg, #6D28D9, #9333EA);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+    }
+
+    .ai-toggle-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.4;
+      transition: all 0.2s;
+    }
+
+    .ai-toggle.active .ai-toggle-dot {
+      opacity: 1;
+      background: #FACC15;
+      box-shadow: 0 0 6px #FACC15;
+      animation: ai-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes ai-pulse {
+      0%, 100% { box-shadow: 0 0 4px #FACC15; }
+      50% { box-shadow: 0 0 10px #FACC15, 0 0 20px rgba(250, 204, 21, 0.4); }
+    }
+
+    /* 照片卡片上的 AI 质量徽章 */
+    .ai-card-badge {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      z-index: 3;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: opacity 0.3s;
+      letter-spacing: 0.3px;
+    }
+
+    .ai-card-badge.quality-high {
+      background: rgba(34, 197, 94, 0.85);
+      color: #fff;
+    }
+
+    .ai-card-badge.quality-mid {
+      background: rgba(234, 179, 8, 0.85);
+      color: #fff;
+    }
+
+    .ai-card-badge.quality-low {
+      background: rgba(239, 68, 68, 0.85);
+      color: #fff;
+    }
+
+    .ai-card-badge.quality-pending {
+      background: rgba(161, 161, 170, 0.5);
+      color: #fff;
+    }
+
+    .ai-card-sharpness-icon {
+      font-size: 10px;
+      opacity: 0.9;
+    }
+
+    /* 预览模态框中的 AI 分析面板 */
+    .ai-preview-panel {
+      position: absolute;
+      top: 80px;
+      right: 16px;
+      width: 220px;
+      background: rgba(24, 24, 27, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 12px;
+      padding: 16px;
+      z-index: 10;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 12px;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .ai-preview-panel.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(10px);
+    }
+
+    .ai-panel-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #A78BFA;
+    }
+
+    .ai-panel-title svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .ai-overall-score {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .ai-score-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .ai-score-circle.high { background: rgba(34, 197, 94, 0.25); color: #4ADE80; }
+    .ai-score-circle.mid { background: rgba(234, 179, 8, 0.25); color: #FACC15; }
+    .ai-score-circle.low { background: rgba(239, 68, 68, 0.25); color: #F87171; }
+
+    .ai-stars {
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .ai-metric-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      gap: 8px;
+    }
+
+    .ai-metric-label {
+      color: rgba(255, 255, 255, 0.65);
+      flex-shrink: 0;
+      width: 40px;
+    }
+
+    .ai-metric-bar-wrap {
+      flex: 1;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .ai-metric-bar {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.5s ease;
+    }
+
+    .ai-metric-bar.sharpness { background: linear-gradient(90deg, #EF4444, #FACC15, #22C55E); }
+    .ai-metric-bar.brightness { background: linear-gradient(90deg, #3B82F6, #22C55E, #FACC15); }
+    .ai-metric-bar.contrast { background: linear-gradient(90deg, #A855F7, #3B82F6, #22C55E); }
+    .ai-metric-bar.color { background: linear-gradient(90deg, #9CA3AF, #F59E0B, #EF4444, #8B5CF6); }
+
+    .ai-metric-val {
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 600;
+      font-size: 11px;
+      width: 24px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* AI 分析进度条（工具栏中） */
+    .ai-progress-mini {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .ai-progress-mini-bar {
+      width: 40px;
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .ai-progress-mini-fill {
+      height: 100%;
+      background: #A78BFA;
+      border-radius: 2px;
+      transition: width 0.3s;
+    }
   </style>
 </head>
 
@@ -698,6 +936,11 @@
       batchSize: 60,          // 每批渲染的卡片数量
       // Object URL 注册表（用于统一回收）
       urlRegistry: new Set(),
+      // AI 分析
+      aiEnabled: false,
+      aiResults: new Map(),   // id -> { sharpness, brightness, contrast, color, overall }
+      aiAnalyzedCount: 0,
+      aiTotalCount: 0,
     };
 
     // ---------- DOM 辅助 ----------
@@ -807,6 +1050,282 @@
       } catch { return null; }
     }
 
+    // ============================================================
+    //  AI 图像质量分析引擎（纯客户端，无需网络）
+    //
+    //  分析维度：
+    //  1. 清晰度 — Laplacian 方差法检测边缘锐度
+    //  2. 曝光度 — 平均亮度 vs 理想中灰
+    //  3. 对比度 — 亮度标准差
+    //  4. 色彩丰富度 — RGB 通道方差
+    //  综合评分 = 清晰度×0.4 + 曝光度×0.25 + 对比度×0.2 + 色彩×0.15
+    // ============================================================
+
+    const AI_ANALYSIS_SIZE = 320; // 分析采样尺寸（像素），与缩略图最大边长一致
+
+    function analyzeImageQuality(photo) {
+      return new Promise((resolve) => {
+        // 使用缩略图进行分析
+        const img = new Image();
+        img.onload = () => {
+          const metrics = computeImageMetrics(img);
+          resolve(metrics);
+        };
+        img.onerror = () => {
+          resolve({ sharpness: 0, brightness: 50, contrast: 0, color: 0, overall: 0, error: true });
+        };
+        // 优先使用缩略图 URL
+        if (photo.thumbUrl) {
+          img.src = photo.thumbUrl;
+        } else if (photo.fullUrl) {
+          img.src = photo.fullUrl;
+        } else {
+          img.src = createObjectURL(photo.file);
+        }
+      });
+    }
+
+    function computeImageMetrics(img) {
+      const canvas = document.createElement('canvas');
+      const size = Math.min(AI_ANALYSIS_SIZE, img.naturalWidth || AI_ANALYSIS_SIZE, img.naturalHeight || AI_ANALYSIS_SIZE);
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      // 居中裁剪为正方形后缩放
+      const srcSize = Math.min(img.naturalWidth, img.naturalHeight);
+      const sx = (img.naturalWidth - srcSize) / 2;
+      const sy = (img.naturalHeight - srcSize) / 2;
+      ctx.drawImage(img, sx, sy, srcSize, srcSize, 0, 0, size, size);
+      const imageData = ctx.getImageData(0, 0, size, size);
+      const pixels = imageData.data;
+
+      const sharpness = computeSharpness(pixels, size, size);
+      const brightness = computeBrightnessScore(pixels, size, size);
+      const contrast = computeContrastScore(pixels, size, size);
+      const color = computeColorRichness(pixels, size, size);
+
+      const overall = Math.round(
+        sharpness * 0.50 +   // 清晰度权重最高——模糊照片直接拉低总分
+        brightness * 0.20 +
+        contrast * 0.15 +
+        color * 0.15
+      );
+
+      return {
+        sharpness: Math.round(sharpness),
+        brightness: Math.round(brightness),
+        contrast: Math.round(contrast),
+        color: Math.round(color),
+        overall: Math.round(overall),
+      };
+    }
+
+    function computeSharpness(pixels, width, height) {
+      // 转灰度 + Laplacian 3×3 核 → 边缘强度方差 → 清晰度
+      // sqrt 归一化：方差越大越锐利，模糊照片得分低
+      const len = width * height;
+      const gray = new Float32Array(len);
+      for (let i = 0; i < len; i++) {
+        const off = i * 4;
+        gray[i] = 0.299 * pixels[off] + 0.587 * pixels[off + 1] + 0.114 * pixels[off + 2];
+      }
+
+      let sum = 0, sumSq = 0, count = 0;
+      for (let y = 1; y < height - 1; y++) {
+        for (let x = 1; x < width - 1; x++) {
+          const idx = y * width + x;
+          const val =
+            -gray[idx - width - 1] - gray[idx - width] - gray[idx - width + 1] +
+            -gray[idx - 1] + 8 * gray[idx] - gray[idx + 1] +
+            -gray[idx + width - 1] - gray[idx + width] - gray[idx + width + 1];
+          sum += val;
+          sumSq += val * val;
+          count++;
+        }
+      }
+
+      const mean = sum / count;
+      const variance = Math.max(0, sumSq / count - mean * mean);
+      // sqrt 线性归一化，var=10→10分, var=100→30分, var=400→60分, var=900→90分
+      return Math.min(100, Math.sqrt(variance) * 3.0);
+    }
+
+    function computeBrightnessScore(pixels, width, height) {
+      let sum = 0;
+      const len = width * height;
+      for (let i = 0; i < len; i++) {
+        const off = i * 4;
+        sum += 0.299 * pixels[off] + 0.587 * pixels[off + 1] + 0.114 * pixels[off + 2];
+      }
+      const avgLum = sum / len;
+      // 理想曝光区间 85-170（比之前更宽），区间内满分
+      if (avgLum >= 85 && avgLum <= 170) return 100;
+      const diff = avgLum < 85 ? (85 - avgLum) : (avgLum - 170);
+      return Math.max(0, 100 - (diff / 85) * 100);
+    }
+
+    function computeContrastScore(pixels, width, height) {
+      let sum = 0, sumSq = 0;
+      const len = width * height;
+      for (let i = 0; i < len; i++) {
+        const off = i * 4;
+        const lum = 0.299 * pixels[off] + 0.587 * pixels[off + 1] + 0.114 * pixels[off + 2];
+        sum += lum;
+        sumSq += lum * lum;
+      }
+      const mean = sum / len;
+      const stdDev = Math.sqrt(Math.max(0, sumSq / len - mean * mean));
+      // 线性归一化，stdDev 80+ 满分
+      return Math.min(100, (stdDev / 80) * 100);
+    }
+
+    function computeColorRichness(pixels, width, height) {
+      let rS = 0, gS = 0, bS = 0, rSq = 0, gSq = 0, bSq = 0;
+      const len = width * height;
+      for (let i = 0; i < len; i++) {
+        const off = i * 4;
+        const r = pixels[off], g = pixels[off + 1], b = pixels[off + 2];
+        rS += r; gS += g; bS += b;
+        rSq += r * r; gSq += g * g; bSq += b * b;
+      }
+      const rVar = Math.max(0, rSq / len - (rS / len) ** 2);
+      const gVar = Math.max(0, gSq / len - (gS / len) ** 2);
+      const bVar = Math.max(0, bSq / len - (bS / len) ** 2);
+      const avgStdDev = Math.sqrt((rVar + gVar + bVar) / 3);
+      // 线性归一化，avgStdDev 65+ 满分
+      return Math.min(100, (avgStdDev / 65) * 100);
+    }
+
+    function getQualityLevel(score) {
+      if (score >= 75) return 'high';
+      if (score >= 45) return 'mid';
+      return 'low';
+    }
+
+    function getStarRating(score) {
+      if (score >= 90) return '👑';
+      if (score >= 75) return '★★★★★';
+      if (score >= 60) return '★★★★☆';
+      if (score >= 45) return '★★★☆☆';
+      if (score >= 30) return '★★☆☆☆';
+      return '★☆☆☆☆';
+    }
+
+    // ============================================================
+    //  AI 批量分析调度器
+    //  分批分析所有照片，不阻塞 UI
+    // ============================================================
+
+    let aiAnalyzeTimer = null;
+
+    async function runAIAnalysis() {
+      if (!state.aiEnabled) return;
+
+      const photos = state.allPhotos;
+      state.aiTotalCount = photos.length;
+      state.aiAnalyzedCount = 0;
+
+      const BATCH = 6; // 每批分析 6 张，各批之间让出主线程
+
+      for (let i = 0; i < photos.length; i++) {
+        if (!state.aiEnabled) break; // 中途关闭则停止
+        const photo = photos[i];
+        if (state.aiResults.has(photo.id)) {
+          state.aiAnalyzedCount++;
+          updateAICardBadge(photo.id);
+          updateAIProgressUI();
+          continue; // 已有缓存，跳过
+        }
+        try {
+          const metrics = await analyzeImageQuality(photo);
+          state.aiResults.set(photo.id, metrics);
+        } catch (e) {
+          state.aiResults.set(photo.id, { sharpness: 0, brightness: 50, contrast: 0, color: 0, overall: 0, error: true });
+        }
+        state.aiAnalyzedCount++;
+        updateAICardBadge(photo.id);
+        updateAIProgressUI();
+
+        if ((i + 1) % BATCH === 0) {
+          await new Promise(r => setTimeout(r, 0));
+        }
+      }
+    }
+
+    function updateAICardBadge(photoId) {
+      if (!state.aiEnabled) return;
+      const card = document.querySelector(`.photo-card[data-id="${photoId}"]`);
+      if (!card) return;
+      const metrics = state.aiResults.get(photoId);
+      if (!metrics) return;
+
+      // 移除旧徽章
+      const existing = card.querySelector('.ai-card-badge');
+      if (existing) existing.remove();
+
+      const level = getQualityLevel(metrics.overall);
+      const badge = document.createElement('div');
+      badge.className = `ai-card-badge quality-${level}`;
+      badge.innerHTML = `<span class="ai-card-sharpness-icon">${getStarRating(metrics.overall)}</span>`;
+      card.appendChild(badge);
+    }
+
+    function updateAIProgressUI() {
+      const el = document.getElementById('aiProgress');
+      if (!el) return;
+      const analyzed = state.aiAnalyzedCount;
+      const total = state.aiTotalCount;
+      const pct = total > 0 ? Math.round((analyzed / total) * 100) : 0;
+      if (analyzed >= total) {
+        el.innerHTML = '<span style="color:#22C55E">✓ 分析完成</span>';
+      } else {
+        el.innerHTML = `
+          <span>分析中 ${analyzed}/${total}</span>
+          <span class="ai-progress-mini-bar"><span class="ai-progress-mini-fill" style="width:${pct}%"></span></span>
+        `;
+      }
+    }
+
+    function renderAIPreviewPanel(photoId) {
+      const metrics = state.aiResults.get(photoId);
+      if (!metrics || metrics.error) {
+        return `<div class="ai-preview-panel">
+          <div class="ai-panel-title">🤖 AI 分析</div>
+          <div style="color:rgba(255,255,255,0.4);font-size:12px;text-align:center;padding:12px 0;">分析中...</div>
+        </div>`;
+      }
+
+      const level = getQualityLevel(metrics.overall);
+      const stars = getStarRating(metrics.overall);
+
+      return `<div class="ai-preview-panel" id="aiPreviewPanel">
+        <div class="ai-panel-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0"/></svg>
+          AI 分析
+        </div>
+        <div class="ai-overall-score">
+          <div class="ai-score-circle ${level}">${metrics.overall}</div>
+          <div>
+            <div class="ai-stars">${stars}</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px;">综合评分</div>
+          </div>
+        </div>
+        ${renderMetricRow('清晰度', metrics.sharpness, 'sharpness')}
+        ${renderMetricRow('曝光度', metrics.brightness, 'brightness')}
+        ${renderMetricRow('对比度', metrics.contrast, 'contrast')}
+        ${renderMetricRow('色彩', metrics.color, 'color')}
+      </div>`;
+    }
+
+    function renderMetricRow(label, value, cls) {
+      const color = value >= 75 ? '#4ADE80' : value >= 45 ? '#FACC15' : '#F87171';
+      return `<div class="ai-metric-row">
+        <span class="ai-metric-label">${label}</span>
+        <span class="ai-metric-bar-wrap"><span class="ai-metric-bar ${cls}" style="width:${value}%"></span></span>
+        <span class="ai-metric-val" style="color:${color}">${value}</span>
+      </div>`;
+    }
+
     // ---------- 导入流程 ----------
     async function handleImport(files) {
       const imageFiles = files.filter(f => f.type.startsWith('image/'));
@@ -873,6 +1392,11 @@
         if (field === 'name') cmp = a.name.localeCompare(b.name, 'zh');
         else if (field === 'date') cmp = (a.dateTaken || '').localeCompare(b.dateTaken || '');
         else if (field === 'size') cmp = a.size - b.size;
+        else if (field === 'quality') {
+          const scoreA = state.aiResults.get(a.id)?.overall ?? 0;
+          const scoreB = state.aiResults.get(b.id)?.overall ?? 0;
+          cmp = scoreA - scoreB;
+        }
         return asc ? cmp : -cmp;
       });
       return sorted;
@@ -904,6 +1428,24 @@
 
       card.appendChild(img);
       card.appendChild(nameEl);
+
+      // AI 质量徽章
+      if (state.aiEnabled) {
+        const metrics = state.aiResults.get(photo.id);
+        if (metrics && !metrics.error) {
+          const level = getQualityLevel(metrics.overall);
+          const badge = document.createElement('div');
+          badge.className = `ai-card-badge quality-${level}`;
+          badge.innerHTML = `<span class="ai-card-sharpness-icon">${getStarRating(metrics.overall)}</span>`;
+          card.appendChild(badge);
+        } else {
+          const badge = document.createElement('div');
+          badge.className = 'ai-card-badge quality-pending';
+          badge.textContent = '...';
+          card.appendChild(badge);
+        }
+      }
+
       return card;
     }
 
@@ -931,10 +1473,10 @@
       // 清理旧的 observer
       if (scrollObserver) scrollObserver.disconnect();
 
-      // 创建哨兵元素
+      // 哨兵放在滚动容器内、grid 之外，避免占 grid 格子
       const sentinel = document.createElement('div');
       sentinel.className = 'scroll-sentinel';
-      grid.appendChild(sentinel);
+      container.appendChild(sentinel);
 
       scrollObserver = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && state.renderedCount < currentGridPhotos.length) {
@@ -1124,6 +1666,11 @@
             <span id="selInfo"></span>
           </div>
           <div class="toolbar-right">
+            <button class="ai-toggle ${state.aiEnabled ? 'active' : ''}" id="aiToggleBtn" title="开启 AI 分析照片质量（清晰度、曝光、对比度、色彩）">
+              <span class="ai-toggle-dot"></span>
+              <span>AI 建议</span>
+            </button>
+            <span class="ai-progress-mini" id="aiProgress"></span>
             <select class="sort-select" id="sortSelect">
               <option value="name-asc">名称 ↑</option>
               <option value="name-desc">名称 ↓</option>
@@ -1131,6 +1678,7 @@
               <option value="date-desc">日期 ↓</option>
               <option value="size-asc">大小 ↑</option>
               <option value="size-desc">大小 ↓</option>
+              ${state.aiEnabled ? '<option value="quality-desc">质量 ↓</option><option value="quality-asc">质量 ↑</option>' : ''}
             </select>
             <button class="toolbar-btn" id="selectAllBtn" title="全选/取消全选">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
@@ -1217,6 +1765,27 @@
         // 仅重新渲染当前视图（排序后的列表）
         render();
       });
+
+      // AI 开关按钮
+      const aiToggleBtn = el.querySelector('#aiToggleBtn');
+      aiToggleBtn.addEventListener('click', () => {
+        state.aiEnabled = !state.aiEnabled;
+        if (state.aiEnabled) {
+          state.aiAnalyzedCount = 0;
+          state.aiTotalCount = state.allPhotos.length;
+          runAIAnalysis();
+        }
+        render();
+      });
+
+      // AI 进度更新
+      if (state.aiEnabled) {
+        updateAIProgressUI();
+        // 如果分析还没跑完，继续跑
+        if (state.aiAnalyzedCount < state.allPhotos.length) {
+          runAIAnalysis();
+        }
+      }
 
       updateSelectionUI();
     }
@@ -1366,12 +1935,14 @@
           <span><kbd>⌫</kbd> 剔除</span>
           <span><kbd>Esc</kbd> 关闭</span>
         </div>
+        <div id="aiPreviewPanelContainer"></div>
       `;
 
       const img = modal.querySelector('#previewImg');
       const counter = modal.querySelector('.preview-counter');
       const meta = modal.querySelector('#previewMeta');
       const keepBtn = modal.querySelector('.preview-btn.keep');
+      const aiPanelContainer = modal.querySelector('#aiPreviewPanelContainer');
 
       function updatePreview() {
         const photo = photos[previewState.currentIndex];
@@ -1384,6 +1955,13 @@
         if (photo.size) parts.push(formatFileSize(photo.size));
         if (photo.dateTaken) parts.push(photo.dateTaken);
         meta.textContent = parts.join(' · ');
+
+        // AI 分析面板
+        if (state.aiEnabled) {
+          aiPanelContainer.innerHTML = renderAIPreviewPanel(photo.id);
+        } else {
+          aiPanelContainer.innerHTML = '';
+        }
 
         // 异步加载原图（按需创建 Object URL）
         if (!photo.fullUrl) photo.fullUrl = createObjectURL(photo.file);
