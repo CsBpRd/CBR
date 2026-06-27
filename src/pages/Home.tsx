@@ -12,7 +12,7 @@ export default function Home() {
   const [projects, setProjects] = useState<Project[]>([])
 
   useEffect(() => {
-    fetch(import.meta.env.BASE_URL + 'data/projects.json')
+    fetch('/data/projects.json')
       .then(r => r.json())
       .then(setProjects)
       .catch(() => setProjects([]))

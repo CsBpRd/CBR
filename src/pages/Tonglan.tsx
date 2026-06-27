@@ -14,7 +14,7 @@ export default function Tonglan() {
     <div>
       <section className="hero" style={{ padding: '140px 20px 80px', background: 'linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.08))' }}>
         <img
-          src="/CBR/tonglan-icon.png"
+          src="/tonglan-icon.png"
           alt="通览"
           style={{ width: 100, height: 100, borderRadius: 22, marginBottom: 24, boxShadow: '0 12px 40px rgba(99,102,241,0.3)' }}
           onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}

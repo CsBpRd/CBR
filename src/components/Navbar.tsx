@@ -11,7 +11,7 @@ export default function Navbar() {
   const location = useLocation()
 
   useEffect(() => {
-    fetch(import.meta.env.BASE_URL + 'data/navigation.json')
+    fetch('/data/navigation.json')
       .then(r => r.json())
       .then(setItems)
       .catch(() => setItems([
