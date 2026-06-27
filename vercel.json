@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/((?!data|assets|LOGO|tonglan-icon|favicon).*)", "destination": "/index.html" }
+    { "source": "/([^.]*)$", "destination": "/index.html" }
   ]
 }
