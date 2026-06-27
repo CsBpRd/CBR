@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 interface NavItem {
@@ -8,20 +8,12 @@ interface NavItem {
 
 export default function Navbar() {
   const [items, setItems] = useState<NavItem[]>([])
-  const location = useLocation()
 
   useEffect(() => {
     fetch('/data/navigation.json')
       .then(r => r.json())
       .then(setItems)
-      .catch(() => setItems([
-        { label: '首页', path: '/' },
-        { label: 'CBR工具箱', path: '/gjx' },
-        { label: 'PU插件', path: '/pu' },
-        { label: 'ZGMZ起始页', path: '/zgmz' },
-        { label: '通览', path: '/tonglan' },
-        { label: '照片筛选器', path: '/photopicker' },
-      ]))
+      .catch(() => setItems([]))
   }, [])
 
   return (
@@ -29,16 +21,20 @@ export default function Navbar() {
       <div className="nav-container">
         <NavLink to="/" className="nav-logo">CSBPRD</NavLink>
         <div className="nav-links">
-          {items.map(item => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              end={item.path === '/'}
-              className={({ isActive }) => isActive ? 'active' : ''}
-            >
-              {item.label}
-            </NavLink>
-          ))}
+          {items.map(item =>
+            item.path.endsWith('.html') ? (
+              <a key={item.path} href={item.path}>{item.label}</a>
+            ) : (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                end={item.path === '/'}
+                className={({ isActive }) => isActive ? 'active' : ''}
+              >
+                {item.label}
+              </NavLink>
+            )
+          )}
         </div>
       </div>
     </nav>

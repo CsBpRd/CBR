@@ -9,6 +9,8 @@ interface Props {
 }
 
 export default function ProjectCard({ icon, title, description, link, gradient }: Props) {
+  const isExternal = link.endsWith('.html') || link.startsWith('http')
+
   return (
     <div className="project-card">
       <div className="project-header" style={{ background: gradient }}>
@@ -17,9 +19,15 @@ export default function ProjectCard({ icon, title, description, link, gradient }
       <div className="project-content">
         <h3>{title}</h3>
         <p>{description}</p>
-        <Link to={link} className="btn">
-          访问官网 <i className="fas fa-external-link-alt"></i>
-        </Link>
+        {isExternal ? (
+          <a href={link} className="btn">
+            打开 <i className="fas fa-external-link-alt"></i>
+          </a>
+        ) : (
+          <Link to={link} className="btn">
+            访问官网 <i className="fas fa-external-link-alt"></i>
+          </Link>
+        )}
       </div>
     </div>
   )

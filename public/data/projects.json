@@ -5,7 +5,7 @@
     "description": "简洁、轻快、实用的多功能工具箱，集合了日常工作和生活中常用的实用功能，让复杂的事情变得简单。",
     "icon": "fa-toolbox",
     "gradient": "linear-gradient(135deg, #2563eb, #3b82f6)",
-    "link": "/gjx.html"
+    "link": "/gjx"
   },
   {
     "id": "pu",
@@ -13,7 +13,7 @@
     "description": "专为PPT制作设计的插件，解决制作过程中的各种问题，让PPT制作变得轻松简单，痛苦迎刃而解。",
     "icon": "fa-window-restore",
     "gradient": "linear-gradient(135deg, #8b5cf6, #a78bfa)",
-    "link": "/pu.html"
+    "link": "/pu"
   },
   {
     "id": "zgmz",
