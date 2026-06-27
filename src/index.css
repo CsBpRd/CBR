@@ -46,7 +46,7 @@ body {
 
 /* Navbar */
 nav {
-  background: var(--bg-secondary); padding: 20px;
+  background: var(--bg-secondary); padding: 20px 70px 20px 20px;
   box-shadow: var(--shadow); position: fixed; top: 0; width: 100%; z-index: 999;
 }
 .nav-container {
