@@ -271,6 +271,9 @@ footer a { color: var(--accent-primary); text-decoration: none; }
 
   /* Theme toggle */
   .theme-toggle { top: 12px; right: 12px; width: 40px; height: 40px; }
+
+  /* Hide particles on mobile */
+  #particles-js { display: none; }
 }
 
 @media (max-width: 480px) {
