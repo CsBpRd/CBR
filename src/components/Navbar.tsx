@@ -8,6 +8,7 @@ interface NavItem {
 
 export default function Navbar() {
   const [items, setItems] = useState<NavItem[]>([])
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     fetch('/data/navigation.json')
@@ -16,20 +17,30 @@ export default function Navbar() {
       .catch(() => setItems([]))
   }, [])
 
+  const closeMenu = () => setMenuOpen(false)
+
   return (
     <nav>
       <div className="nav-container">
-        <NavLink to="/" className="nav-logo">CSBPRD</NavLink>
-        <div className="nav-links">
+        <NavLink to="/" className="nav-logo" onClick={closeMenu}>CSBPRD</NavLink>
+        <button
+          className="nav-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="菜单"
+        >
+          <i className={`fas fa-${menuOpen ? 'times' : 'bars'}`}></i>
+        </button>
+        <div className={`nav-links${menuOpen ? ' open' : ''}`}>
           {items.map(item =>
             item.path.endsWith('.html') ? (
-              <a key={item.path} href={item.path}>{item.label}</a>
+              <a key={item.path} href={item.path} onClick={closeMenu}>{item.label}</a>
             ) : (
               <NavLink
                 key={item.path}
                 to={item.path}
                 end={item.path === '/'}
                 className={({ isActive }) => isActive ? 'active' : ''}
+                onClick={closeMenu}
               >
                 {item.label}
               </NavLink>

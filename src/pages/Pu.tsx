@@ -2,7 +2,7 @@ export default function Pu() {
   return (
     <div>
       <section className="hero" style={{ padding: '120px 20px 60px', background: 'linear-gradient(135deg, rgba(139,92,246,0.1), rgba(167,139,250,0.1))' }}>
-        <h1 style={{ fontSize: '3.5rem', color: '#8b5cf6' }}>
+        <h1 style={{ color: '#8b5cf6' }}>
           <i className="fas fa-window-restore"></i> PPT ULTRA
         </h1>
         <p style={{ fontSize: '1.5rem', marginTop: 16 }}>AI灵感 一键获得</p>

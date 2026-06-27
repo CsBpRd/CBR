@@ -45,7 +45,7 @@ export default function Tonglan() {
           style={{ width: 100, height: 100, borderRadius: 22, marginBottom: 24, boxShadow: '0 12px 40px rgba(99,102,241,0.3)' }}
           onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
         />
-        <h1 style={{ fontSize: '3.5rem', marginBottom: 16, background: 'linear-gradient(90deg, #6366f1, #8b5cf6)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
+        <h1 style={{ marginBottom: 16, background: 'linear-gradient(90deg, #6366f1, #8b5cf6)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
           通览
         </h1>
         <p>可自定义名称、周期、目录与主题的新闻报告浏览器。支持 HTML、Markdown、纯文本，自动识别文件格式，即开即用。</p>

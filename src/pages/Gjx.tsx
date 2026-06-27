@@ -2,7 +2,7 @@ export default function Gjx() {
   return (
     <div>
       <section className="hero" style={{ padding: '120px 20px 60px' }}>
-        <h1 style={{ fontSize: '3.5rem', color: 'var(--accent-primary)' }}>
+        <h1 style={{ color: 'var(--accent-primary)' }}>
           <i className="fas fa-toolbox"></i> CBR工具箱
         </h1>
         <p style={{ fontSize: '1.5rem', marginTop: 16 }}>清爽界面，灵动随心</p>

@@ -23,7 +23,7 @@ export default function Home() {
       <ParticleBg />
       <header style={{ textAlign: 'center', padding: '180px 20px 80px', position: 'relative' }}>
         <div style={{ maxWidth: 800, margin: '0 auto' }}>
-          <h1 style={{ fontSize: '6rem', marginBottom: 20, background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent', textTransform: 'uppercase', letterSpacing: 4 }}>
+          <h1 className="home-title" style={{ background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent', textTransform: 'uppercase', letterSpacing: 4 }}>
             CSBPRD
           </h1>
           <p style={{ fontSize: '1.5rem', opacity: 0.9, marginBottom: 30 }}>这里是陈伯睿的个人主页</p>
@@ -38,7 +38,7 @@ export default function Home() {
 
       <section id="about" style={{ maxWidth: 1200, margin: '0 auto 80px', padding: '0 20px' }}>
         <h2 className="section-title">关于我</h2>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 50, background: 'var(--bg-card)', borderRadius: 20, padding: 40, boxShadow: 'var(--shadow)' }}>
+        <div className="about-card" style={{ background: 'var(--bg-card)', borderRadius: 20, padding: 40, boxShadow: 'var(--shadow)' }}>
           <div style={{ width: 200, height: 200, borderRadius: '50%', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '5rem', color: 'white', flexShrink: 0 }}>
             <i className="fas fa-user"></i>
           </div>
