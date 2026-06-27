@@ -5,6 +5,6 @@ export default defineConfig({
   plugins: [react()],
   base: '/CBR/',
   build: {
-    outDir: 'dist',
+    outDir: 'docs',
   },
 })
