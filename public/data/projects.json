@@ -5,7 +5,7 @@
     "description": "简洁、轻快、实用的多功能工具箱，集合了日常工作和生活中常用的实用功能，让复杂的事情变得简单。",
     "icon": "fa-toolbox",
     "gradient": "linear-gradient(135deg, #2563eb, #3b82f6)",
-    "link": "/gjx"
+    "link": "/gjx.html"
   },
   {
     "id": "pu",
@@ -13,7 +13,7 @@
     "description": "专为PPT制作设计的插件，解决制作过程中的各种问题，让PPT制作变得轻松简单，痛苦迎刃而解。",
     "icon": "fa-window-restore",
     "gradient": "linear-gradient(135deg, #8b5cf6, #a78bfa)",
-    "link": "/pu"
+    "link": "/pu.html"
   },
   {
     "id": "zgmz",
@@ -21,7 +21,7 @@
     "description": "精心设计的浏览器起始页，让你每次打开浏览器都能拥有愉悦的心情和高效的工作体验。",
     "icon": "fa-home",
     "gradient": "linear-gradient(135deg, #ec4899, #f472b6)",
-    "link": "/zgmz"
+    "link": "/zgmzpage.html"
   },
   {
     "id": "tonglan",
@@ -37,6 +37,6 @@
     "description": "智能照片筛选工具，轻松管理和筛选你的图片库，快速找到想要的图片。",
     "icon": "fa-images",
     "gradient": "linear-gradient(135deg, #10b981, #34d399)",
-    "link": "/photopicker"
+    "link": "/photopicker.html"
   }
 ]
