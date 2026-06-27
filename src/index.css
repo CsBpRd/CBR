@@ -195,6 +195,9 @@ footer a { color: var(--accent-primary); text-decoration: none; }
 /* Home title */
 .home-title { font-size: 6rem; margin-bottom: 20px; }
 
+/* Hero buttons */
+.hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
 /* About card (home) */
 .about-card {
   display: flex; align-items: center; gap: 50px;

@@ -27,12 +27,14 @@ export default function Home() {
             CSBPRD
           </h1>
           <p style={{ fontSize: '1.5rem', opacity: 0.9, marginBottom: 30 }}>这里是陈伯睿的个人主页</p>
-          <a href="#projects" className="btn">
-            查看作品 <i className="fas fa-arrow-down"></i>
-          </a>
-          <a href="#about" className="btn" style={{ marginLeft: 12 }}>
-            了解更多 <i className="fas fa-user"></i>
-          </a>
+          <div className="hero-btns">
+            <a href="#projects" className="btn">
+              查看作品 <i className="fas fa-arrow-down"></i>
+            </a>
+            <a href="#about" className="btn btn-outline">
+              了解更多 <i className="fas fa-user"></i>
+            </a>
+          </div>
         </div>
       </header>
 
