@@ -20,8 +20,8 @@ export default function ParticleBg() {
     let particles: Particle[] = []
     const COUNT = 80
     const MAX_DIST = 150
-    const MOUSE_RADIUS = 180
-    const ATTRACT_FORCE = 0.03
+    const MOUSE_RADIUS = 250
+    const ATTRACT_FORCE = 0.12
 
     function resize() {
       W = window.innerWidth
@@ -37,10 +37,10 @@ export default function ParticleBg() {
       particles.push({
         x: Math.random() * W,
         y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 1.2,
-        vy: (Math.random() - 0.5) * 1.2,
-        size: Math.random() * 2.5 + 1.5,
-        opacity: Math.random() * 0.4 + 0.2
+        vx: (Math.random() - 0.5) * 2,
+        vy: (Math.random() - 0.5) * 2,
+        size: Math.random() * 1.5 + 1,
+        opacity: Math.random() * 0.3 + 0.2
       })
     }
 
@@ -65,18 +65,18 @@ export default function ParticleBg() {
         p.y += p.vy
 
         // Damping
-        p.vx *= 0.99
-        p.vy *= 0.99
+        p.vx *= 0.995
+        p.vy *= 0.995
 
-        // Add slight random drift
-        p.vx += (Math.random() - 0.5) * 0.05
-        p.vy += (Math.random() - 0.5) * 0.05
+        // Slight random drift
+        p.vx += (Math.random() - 0.5) * 0.04
+        p.vy += (Math.random() - 0.5) * 0.04
 
         // Speed limit
         const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy)
-        if (speed > 3) {
-          p.vx = (p.vx / speed) * 3
-          p.vy = (p.vy / speed) * 3
+        if (speed > 4) {
+          p.vx = (p.vx / speed) * 4
+          p.vy = (p.vy / speed) * 4
         }
 
         // Wrap around edges
@@ -93,12 +93,12 @@ export default function ParticleBg() {
           const dy = particles[i].y - particles[j].y
           const dist = Math.sqrt(dx * dx + dy * dy)
           if (dist < MAX_DIST) {
-            const alpha = (1 - dist / MAX_DIST) * 0.3
+            const alpha = (1 - dist / MAX_DIST) * 0.4
             ctx.beginPath()
             ctx.moveTo(particles[i].x, particles[i].y)
             ctx.lineTo(particles[j].x, particles[j].y)
             ctx.strokeStyle = `rgba(96,165,250,${alpha})`
-            ctx.lineWidth = 0.8
+            ctx.lineWidth = 1
             ctx.stroke()
           }
         }
