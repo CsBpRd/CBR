@@ -21,7 +21,7 @@ const CONFIG = {
     }
   },
   interactivity: {
-    detect_on: 'canvas',
+    detect_on: 'window',
     events: {
       onhover: { enable: true, mode: 'grab' },
       onclick: { enable: true, mode: 'push' },
