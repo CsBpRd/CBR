@@ -23,7 +23,7 @@ const CONFIG = {
   interactivity: {
     detect_on: 'canvas',
     events: {
-      onhover: { enable: true, mode: 'repulse' },
+      onhover: { enable: true, mode: 'grab' },
       onclick: { enable: true, mode: 'push' },
       resize: true
     },

@@ -1,6 +1,9 @@
+import ParticleBg from '../components/ParticleBg'
+
 export default function Pu() {
   return (
     <div>
+      <ParticleBg />
       <section className="hero" style={{ padding: '120px 20px 60px', background: 'linear-gradient(135deg, rgba(139,92,246,0.1), rgba(167,139,250,0.1))' }}>
         <h1 style={{ color: '#8b5cf6' }}>
           <i className="fas fa-window-restore"></i> PPT ULTRA
@@ -11,7 +14,7 @@ export default function Pu() {
         </a>
       </section>
 
-      <section style={{ maxWidth: 1200, margin: '0 auto 80px', padding: '0 20px' }}>
+      <section style={{ maxWidth: 1200, margin: '0 auto', padding: '60px 20px 0' }}>
         <h2 className="section-title">核心功能</h2>
         <div className="features-grid">
           <div className="feature-card">
@@ -31,7 +34,7 @@ export default function Pu() {
         </div>
       </section>
 
-      <section style={{ maxWidth: 1200, margin: '0 auto 100px', padding: '0 20px' }}>
+      <section style={{ maxWidth: 1200, margin: '0 auto', padding: '40px 20px 0' }}>
         <h2 className="section-title">更多便捷功能</h2>
         <div className="features-grid">
           {[

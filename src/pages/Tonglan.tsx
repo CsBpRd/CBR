@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import FeatureCard from '../components/FeatureCard'
+import ParticleBg from '../components/ParticleBg'
 
 const features = [
   { icon: 'fa-tag', title: '自定义名称', description: 'App 名称自由设定，不限于科技新闻，任何类型的报告都能完美适配。', color: '#6366f1' },
@@ -38,6 +39,7 @@ export default function Tonglan() {
 
   return (
     <div>
+      <ParticleBg />
       <section className="hero" style={{ padding: '140px 20px 80px', background: 'linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.08))' }}>
         <img
           src="/tonglan-icon.png"

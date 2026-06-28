@@ -1,6 +1,9 @@
+import ParticleBg from '../components/ParticleBg'
+
 export default function Gjx() {
   return (
     <div>
+      <ParticleBg />
       <section className="hero" style={{ padding: '120px 20px 60px' }}>
         <h1 style={{ color: 'var(--accent-primary)' }}>
           <i className="fas fa-toolbox"></i> CBR工具箱
@@ -11,7 +14,7 @@ export default function Gjx() {
         </a>
       </section>
 
-      <section style={{ maxWidth: 1200, margin: '0 auto 80px', padding: '0 20px' }}>
+      <section style={{ maxWidth: 1200, margin: '0 auto', padding: '60px 20px 0' }}>
         <h2 className="section-title">功能亮点</h2>
         <div className="features-grid">
           <div className="feature-card">
@@ -31,7 +34,7 @@ export default function Gjx() {
         </div>
       </section>
 
-      <section style={{ maxWidth: 1200, margin: '0 auto 100px', padding: '0 20px' }}>
+      <section style={{ maxWidth: 1200, margin: '0 auto', padding: '40px 20px 0' }}>
         <h2 className="section-title">具体功能</h2>
         <div className="features-grid">
           {[
