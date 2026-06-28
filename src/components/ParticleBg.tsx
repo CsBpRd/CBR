@@ -1,53 +1,61 @@
 import { useEffect } from 'react'
 
-const CONFIG = {
-  particles: {
-    number: { value: 80, density: { enable: true, value_area: 800 } },
-    color: { value: '#60a5fa' },
-    shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
-    opacity: {
-      value: 0.5, random: false,
-      anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
-    },
-    size: {
-      value: 3, random: true,
-      anim: { enable: true, speed: 2, size_min: 0.1, sync: false }
-    },
-    line_linked: { enable: true, distance: 150, color: '#60a5fa', opacity: 0.4, width: 1 },
-    move: {
-      enable: true, speed: 2, direction: 'none', random: false,
-      straight: false, out_mode: 'out', bounce: false,
-      attract: { enable: false, rotateX: 600, rotateY: 1200 }
-    }
-  },
-  interactivity: {
-    detect_on: 'window',
-    events: {
-      onhover: { enable: true, mode: 'grab' },
-      onclick: { enable: true, mode: 'push' },
-      resize: true
-    },
-    modes: {
-      grab: { distance: 400, line_linked: { opacity: 1 } },
-      bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
-      repulse: { distance: 200, duration: 0.4 },
-      push: { particles_nb: 4 },
-      remove: { particles_nb: 2 }
-    }
-  },
-  retina_detect: true
-}
+let initialized = false
 
 export default function ParticleBg() {
   useEffect(() => {
+    if (initialized) return
+
     const script = document.createElement('script')
-    script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'
-    script.onload = () => {
-      (window as any).particlesJS?.('particles-js', CONFIG)
+    script.src = 'https://cdn.jsdelivr.net/npm/tsparticles@3.8.1/tsparticles.bundle.min.js'
+    script.onload = async () => {
+      const tsp = (window as any).tsParticles
+      if (!tsp) return
+      initialized = true
+
+      await tsp.load({
+        id: 'tsparticles',
+        options: {
+          fpsLimit: 60,
+          particles: {
+            number: { value: 80, density: { enable: true } },
+            color: { value: '#60a5fa' },
+            shape: { type: 'circle' },
+            opacity: {
+              value: 0.5,
+              animation: { enable: true, speed: 1, minimumValue: 0.1, sync: false }
+            },
+            size: {
+              value: 3,
+              animation: { enable: true, speed: 2, minimumValue: 0.1, sync: false }
+            },
+            links: {
+              enable: true, distance: 150, color: '#60a5fa', opacity: 0.4, width: 1
+            },
+            move: {
+              enable: true, speed: 2, direction: 'none',
+              random: false, straight: false, outModes: 'out'
+            }
+          },
+          interactivity: {
+            events: {
+              onHover: { enable: true, mode: 'attract' },
+              onClick: { enable: true, mode: 'push' }
+            },
+            modes: {
+              attract: { distance: 200, duration: 0.4, speed: 1 },
+              push: { quantity: 4 }
+            }
+          }
+        }
+      })
     }
     document.body.appendChild(script)
-    return () => { script.remove() }
+
+    return () => {
+      script.remove()
+    }
   }, [])
 
-  return <div id="particles-js"></div>
+  return <div id="tsparticles" style={{ position: 'fixed', width: '100%', height: '100%', top: 0, left: 0, zIndex: -1, pointerEvents: 'none' }} />
 }
