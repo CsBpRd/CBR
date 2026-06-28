@@ -7,7 +7,7 @@ export default function ParticleBg() {
     if (initialized) return
 
     const script = document.createElement('script')
-    script.src = 'https://cdn.jsdelivr.net/npm/tsparticles@3.8.1/tsparticles.bundle.min.js'
+    script.src = 'https://cdn.jsdelivr.net/npm/@tsparticles/all@3/tsparticles.all.bundle.min.js'
     script.onload = async () => {
       const tsp = (window as any).tsParticles
       if (!tsp) return
