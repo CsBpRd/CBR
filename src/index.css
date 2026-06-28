@@ -161,8 +161,7 @@ footer a { color: var(--accent-primary); text-decoration: none; }
 }
 .social-link:hover { background: var(--accent-primary); color: white; transform: translateY(-5px); }
 
-/* Particle bg */
-#tsparticles { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; pointer-events: none; }
+/* Particle bg — canvas handled by ParticleBg component */
 
 /* Preview window */
 .preview-box {
@@ -274,7 +273,7 @@ footer a { color: var(--accent-primary); text-decoration: none; }
   .theme-toggle { top: 12px; right: 12px; width: 40px; height: 40px; }
 
   /* Hide particles on mobile */
-  #tsparticles { display: none; }
+  canvas[style*="z-index: -1"] { display: none; }
 }
 
 @media (max-width: 480px) {
