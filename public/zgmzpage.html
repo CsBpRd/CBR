@@ -1,21 +1,151 @@
 <html lang="zh-CN" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZGMZ起始页</title>
     <link rel="stylesheet" href="./beginPageCss.css" type="text/css">
     <link rel="icon" href="https://framerusercontent.com/images/dE0QDlHif2KbL2aaU3aq2F71e4M.png">
-  </head>
-  <body>
+</head>
+<body>
     <div class="backgroundBox1">
-      <div class="backgroundBox2">
-        <div id="backgroundFormStyle">
-          <form action="https://www.bing.com/" method="get" target="_parent" id="searchForm">
-            <input type="hidden" name="search" value="？">
-            <input type="text" name="q" id="searchInput" autocomplete="off">
-            <input type="submit" value="" id="confirmInput">
-          </form>
+        <div class="backgroundBox2">
+            <div id="displayArea">
+                <div class="display-cards" id="displayCards"></div>
+            </div>
+            <div id="backgroundFormStyle">
+                <form action="https://www.bing.com/search" method="get" target="_parent" id="searchForm">
+                    <select id="engineSelect"></select>
+                    <input type="hidden" name="search" value="？">
+                    <input type="text" name="q" id="searchInput" autocomplete="off" placeholder="搜索一下...">
+                    <input type="submit" value="" id="confirmInput">
+                </form>
+            </div>
+            <div class="iconBackBoxAll" id="shortcutsContainer"></div>
         </div>
-        
-      </div>
     </div>
 
+    <div id="contextMenu" class="context-menu"></div>
+
+    <div id="welcomeModal" class="modal-overlay">
+        <div class="modal-card shortcut-modal">
+            <div class="modal-header">
+                <h3>欢迎使用 ZGMZ起始页</h3>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom:10px;">这是一个简洁的浏览器起始页，支持以下功能：</p>
+                <p>- 自定义搜索引擎</p>
+                <p>- 添加/编辑/删除快捷方式</p>
+                <p>- 自定义显示内容（日期、时间、问候语、自定义文字）</p>
+                <p>- 右键菜单快速操作</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-confirm" id="welcomeStartBtn">开始使用</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="shortcutModal" class="modal-overlay">
+        <div class="modal-card shortcut-modal">
+            <div class="modal-header">
+                <h3 id="shortcutModalTitle">添加快捷方式</h3>
+                <span class="modal-close" id="shortcutModalClose">&times;</span>
+            </div>
+            <div class="modal-body">
+                <label class="modal-label">名称</label>
+                <input type="text" id="shortcutName" class="modal-input" placeholder="快捷方式名称">
+                <label class="modal-label">网址</label>
+                <input type="text" id="shortcutUrl" class="modal-input" placeholder="https://example.com">
+                <label class="modal-label">图标</label>
+                <div class="icon-tabs">
+                    <button class="icon-tab" data-tab="upload">上传图片</button>
+                    <button class="icon-tab active" data-tab="symbol">符号图标</button>
+                </div>
+                <div class="icon-tab-content" id="tabUpload">
+                    <input type="file" id="iconFileInput" accept="image/*">
+                    <div id="iconPreview" class="icon-preview"></div>
+                </div>
+                <div class="icon-tab-content" id="tabSymbol">
+                    <input type="text" id="symbolInput" class="modal-input" placeholder="输入emoji或字符" maxlength="2" readonly>
+                    <div id="symbolPreview" class="symbol-preview"></div>
+                    <div class="symbol-options">
+                        <label><input type="checkbox" id="symbolBold"> 加粗</label>
+                        <label>颜色 <input type="color" id="symbolColor" value="#000000"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-cancel" id="shortcutModalCancel">取消</button>
+                <button class="modal-btn modal-btn-confirm" id="shortcutModalSave">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="settingsModal" class="modal-overlay">
+        <div class="modal-card settings-modal">
+            <div class="modal-header">
+                <h3>设置</h3>
+                <span class="modal-close" id="settingsModalClose">&times;</span>
+            </div>
+            <div class="modal-body settings-body">
+                <div class="settings-section">
+                    <h4 class="settings-section-title">搜索引擎</h4>
+                    <div class="settings-row">
+                        <label class="settings-label">当前引擎</label>
+                        <select id="settingsEngineSelect" class="settings-select"></select>
+                        <button class="settings-del-btn" id="deleteEngineBtn">删除</button>
+                    </div>
+                    <div class="settings-row">
+                        <input type="text" id="newEngineName" class="modal-input" placeholder="引擎名称">
+                        <input type="text" id="newEngineUrl" class="modal-input" placeholder="搜索URL模板 (含%s)">
+                        <button class="settings-add-btn" id="addEngineBtn">添加</button>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h4 class="settings-section-title">显示内容</h4>
+                    <div class="settings-toggle-row">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="toggleDate" class="toggle-input" checked>
+                            <span class="toggle-switch"></span>
+                            日期
+                        </label>
+                        <label class="toggle-label">
+                            <input type="checkbox" id="toggleTime" class="toggle-input" checked>
+                            <span class="toggle-switch"></span>
+                            时间
+                        </label>
+                    </div>
+                    <div class="settings-toggle-row">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="toggleGreeting" class="toggle-input" checked>
+                            <span class="toggle-switch"></span>
+                            问候语
+                        </label>
+                        <label class="toggle-label">
+                            <input type="checkbox" id="toggleCustomText" class="toggle-input">
+                            <span class="toggle-switch"></span>
+                            自定义文字
+                        </label>
+                    </div>
+                    <div class="settings-row" id="userNameRow">
+                        <label class="settings-label">姓名</label>
+                        <input type="text" id="userNameInput" class="modal-input" placeholder="输入你的名字">
+                    </div>
+                    <div class="settings-row" id="customTextRow" style="display:none">
+                        <input type="text" id="customTextInput" class="modal-input" placeholder="自定义文字内容">
+                    </div>
+                    <div id="customTextHint" style="display:none;color:#999;font-size:12px;margin-top:6px;">可用变量：{name} {greeting} {time} {date} {hour} {minute} {second} {weekday}</div>
+                    <div id="charCounter" style="display:none;color:#999;font-size:11px;margin-top:4px;text-align:right;"></div>
+                </div>
+                <div class="settings-section">
+                    <h4 class="settings-section-title">数据管理</h4>
+                    <div class="settings-row">
+                        <button class="modal-btn modal-btn-cancel" id="resetAllBtn" style="color:#c44;" onclick="resetAllData()">清除配置</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-confirm" id="settingsModalCloseBtn">完成</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./zgmzpage.js"></script>
 </body></html>
