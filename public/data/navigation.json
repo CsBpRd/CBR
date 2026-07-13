@@ -1,8 +1,30 @@
 [
-  { "label": "首页", "path": "/" },
-  { "label": "CBR工具箱", "path": "/gjx" },
-  { "label": "PU插件", "path": "/pu" },
-  { "label": "ZGMZ起始页", "path": "/zgmzpage.html" },
-  { "label": "通览", "path": "/tonglan" },
-  { "label": "照片筛选器", "path": "/photopicker.html" }
+  {
+    "label": "首页",
+    "path": "/"
+  },
+  {
+    "label": "CBR工具箱",
+    "path": "/gjx"
+  },
+  {
+    "label": "PU插件",
+    "path": "/pu"
+  },
+  {
+    "label": "ZGMZ起始页",
+    "path": "/zgmzpage.html"
+  },
+  {
+    "label": "通览",
+    "path": "/tonglan"
+  },
+  {
+    "label": "照片筛选器",
+    "path": "/photopicker.html"
+  },
+  {
+    "label": "风暴志",
+    "path": "https://typhoon-atlas.vercel.app"
+  }
 ]
