@@ -4,8 +4,8 @@ export default function Pu() {
   return (
     <div>
       <ParticleBg />
-      <section className="hero" style={{ padding: '120px 20px 60px', background: 'linear-gradient(135deg, rgba(139,92,246,0.1), rgba(167,139,250,0.1))' }}>
-        <h1 style={{ color: '#8b5cf6' }}>
+      <section className="hero" style={{ padding: '120px 20px 60px' }}>
+        <h1 style={{ color: 'var(--accent-primary)' }}>
           <i className="fas fa-window-restore"></i> PPT ULTRA
         </h1>
         <p style={{ fontSize: '1.5rem', marginTop: 16 }}>AI灵感 一键获得</p>
@@ -18,14 +18,14 @@ export default function Pu() {
         <h2 className="section-title">核心功能</h2>
         <div className="features-grid">
           <div className="feature-card">
-            <div style={{ fontSize: '3rem', color: '#8b5cf6', marginBottom: 20 }}>
+            <div style={{ fontSize: '3rem', color: 'var(--accent-primary)', marginBottom: 20 }}>
               <i className="fas fa-paint-brush"></i>
             </div>
             <h3 style={{ fontSize: '1.5rem', marginBottom: 15 }}>智能设计</h3>
             <p style={{ color: 'var(--text-secondary)' }}>PU插件提供智能设计功能，可根据你的内容自动生成美观的PPT布局和配色方案。</p>
           </div>
           <div className="feature-card">
-            <div style={{ fontSize: '3rem', color: '#8b5cf6', marginBottom: 20 }}>
+            <div style={{ fontSize: '3rem', color: 'var(--accent-primary)', marginBottom: 20 }}>
               <i className="fas fa-bolt"></i>
             </div>
             <h3 style={{ fontSize: '1.5rem', marginBottom: 15 }}>快速制作</h3>
@@ -46,7 +46,7 @@ export default function Pu() {
             { icon: 'fa-image', title: '必应每日壁纸', desc: '每日提供高质量壁纸，美化你的PPT' },
           ].map((f, i) => (
             <div key={i} className="feature-card" style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '2rem', color: '#8b5cf6', marginBottom: 15 }}>
+              <div style={{ fontSize: '2rem', color: 'var(--accent-primary)', marginBottom: 15 }}>
                 <i className={`fas ${f.icon}`}></i>
               </div>
               <h3 style={{ fontSize: '1.1rem', marginBottom: 10 }}>{f.title}</h3>

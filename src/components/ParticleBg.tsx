@@ -97,7 +97,7 @@ export default function ParticleBg() {
             ctx.beginPath()
             ctx.moveTo(particles[i].x, particles[i].y)
             ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.strokeStyle = `rgba(96,165,250,${alpha})`
+            ctx.strokeStyle = `rgba(251,146,60,${alpha})`
             ctx.lineWidth = 1
             ctx.stroke()
           }
@@ -108,7 +108,7 @@ export default function ParticleBg() {
       for (const p of particles) {
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(96,165,250,${p.opacity})`
+        ctx.fillStyle = `rgba(251,146,60,${p.opacity})`
         ctx.fill()
       }
 

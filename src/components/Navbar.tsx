@@ -22,7 +22,10 @@ export default function Navbar() {
   return (
     <nav>
       <div className="nav-container">
-        <NavLink to="/" className="nav-logo" onClick={closeMenu}>CSBPRD</NavLink>
+        <NavLink to="/" className="nav-logo" onClick={closeMenu}>
+          <img src="/LOGO.png" alt="Logo" style={{ height: 32, width: 'auto', verticalAlign: 'middle', marginRight: 8 }} />
+          CSBPRD
+        </NavLink>
         <button
           className="nav-toggle"
           onClick={() => setMenuOpen(!menuOpen)}

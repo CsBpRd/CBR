@@ -3,12 +3,12 @@ import FeatureCard from '../components/FeatureCard'
 import ParticleBg from '../components/ParticleBg'
 
 const features = [
-  { icon: 'fa-tag', title: '自定义名称', description: 'App 名称自由设定，不限于科技新闻，任何类型的报告都能完美适配。', color: '#6366f1' },
-  { icon: 'fa-calendar-alt', title: '灵活周期', description: '日报、周报、月报一键切换，所有界面文字自动跟随，无需手动调整。', color: '#8b5cf6' },
+  { icon: 'fa-tag', title: '自定义名称', description: 'App 名称自由设定，不限于科技新闻，任何类型的报告都能完美适配。', color: '#fb923c' },
+  { icon: 'fa-calendar-alt', title: '灵活周期', description: '日报、周报、月报一键切换，所有界面文字自动跟随，无需手动调整。', color: '#fbbf24' },
   { icon: 'fa-folder-open', title: '自由目录', description: '任意选择本地文件夹，智能扫描并自动识别文件命名格式。', color: '#22c55e' },
   { icon: 'fa-adjust', title: '亮暗主题', description: '内置暗色与亮色双主题，一键切换，设置自动保存。', color: '#f59e0b' },
   { icon: 'fa-file-alt', title: '多格式支持', description: 'HTML、Markdown、纯文本均可预览，自动识别并渲染。', color: '#ef4444' },
-  { icon: 'fa-magic', title: '智能检测', description: '选择目录后自动识别文件命名格式，无需手动配置。', color: '#6366f1' },
+  { icon: 'fa-magic', title: '智能检测', description: '选择目录后自动识别文件命名格式，无需手动配置。', color: '#fb923c' },
 ]
 
 type Period = 'daily' | 'weekly' | 'monthly'
@@ -40,14 +40,14 @@ export default function Tonglan() {
   return (
     <div>
       <ParticleBg />
-      <section className="hero" style={{ padding: '140px 20px 80px', background: 'linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.08))' }}>
+      <section className="hero" style={{ padding: '140px 20px 80px' }}>
         <img
           src="/tonglan-icon.png"
           alt="通览"
-          style={{ width: 100, height: 100, borderRadius: 22, marginBottom: 24, boxShadow: '0 12px 40px rgba(99,102,241,0.3)' }}
+          style={{ width: 100, height: 100, borderRadius: 22, marginBottom: 24, boxShadow: '0 12px 40px rgba(251,146,60,0.3)' }}
           onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
         />
-        <h1 style={{ marginBottom: 16, background: 'linear-gradient(90deg, #6366f1, #8b5cf6)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
+        <h1 style={{ marginBottom: 16, color: 'var(--accent-primary)' }}>
           通览
         </h1>
         <p>可自定义名称、周期、目录与主题的新闻报告浏览器。支持 HTML、Markdown、纯文本，自动识别文件格式，即开即用。</p>
@@ -90,8 +90,8 @@ export default function Tonglan() {
                   style={{
                     padding: '3px 10px', borderRadius: 6, border: 'none', cursor: 'pointer',
                     fontSize: 11, fontWeight: period === p ? 600 : 400,
-                    background: period === p ? 'rgba(99,102,241,0.25)' : 'transparent',
-                    color: period === p ? '#818cf8' : 'var(--text-secondary)',
+                    background: period === p ? 'rgba(251,146,60,0.25)' : 'transparent',
+                    color: period === p ? '#fb923c' : 'var(--text-secondary)',
                     transition: 'all 0.2s',
                   }}
                 >
@@ -106,8 +106,8 @@ export default function Tonglan() {
                 onClick={() => { setActiveView('all'); setSelectedCard(null) }}
                 style={{
                   padding: '8px 10px', borderRadius: 8, fontSize: 12, cursor: 'pointer',
-                  background: activeView === 'all' ? 'rgba(99,102,241,0.15)' : 'transparent',
-                  color: activeView === 'all' ? '#818cf8' : 'var(--text-secondary)',
+                  background: activeView === 'all' ? 'rgba(251,146,60,0.15)' : 'transparent',
+                  color: activeView === 'all' ? '#fb923c' : 'var(--text-secondary)',
                   marginBottom: 2, transition: 'all 0.2s',
                 }}
               >
@@ -120,8 +120,8 @@ export default function Tonglan() {
                   onClick={() => { setActiveView(y as View); setSelectedCard(null) }}
                   style={{
                     padding: '8px 10px', borderRadius: 8, fontSize: 12, cursor: 'pointer',
-                    background: activeView === y ? 'rgba(99,102,241,0.15)' : 'transparent',
-                    color: activeView === y ? '#818cf8' : 'var(--text-secondary)',
+                    background: activeView === y ? 'rgba(251,146,60,0.15)' : 'transparent',
+                    color: activeView === y ? '#fb923c' : 'var(--text-secondary)',
                     marginBottom: 2, transition: 'all 0.2s',
                   }}
                 >
@@ -131,13 +131,13 @@ export default function Tonglan() {
             </div>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <strong style={{ fontSize: 15, background: 'linear-gradient(90deg, #6366f1, #8b5cf6)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
+                <strong style={{ fontSize: 15, color: 'var(--accent-primary)' }}>
                   科技新闻{label}
                 </strong>
                 <span style={{
                   padding: '4px 10px', borderRadius: 12, fontSize: 11, cursor: 'text',
-                  background: searchFocused ? 'rgba(99,102,241,0.08)' : 'rgba(255,255,255,0.03)',
-                  border: `1px solid ${searchFocused ? 'rgba(99,102,241,0.3)' : 'var(--border-color)'}`,
+                  background: searchFocused ? 'rgba(251,146,60,0.08)' : 'rgba(255,255,255,0.03)',
+                  border: `1px solid ${searchFocused ? 'rgba(251,146,60,0.3)' : 'var(--border-color)'}`,
                   color: searchFocused ? 'var(--text-primary)' : 'var(--text-secondary)',
                   transition: 'all 0.2s',
                 }}>
@@ -174,8 +174,8 @@ export default function Tonglan() {
                         onClick={() => setSelectedCard(isSelected ? null : i)}
                         style={{
                           flex: 1, padding: 14, borderRadius: 10, cursor: 'pointer',
-                          background: isSelected ? 'rgba(99,102,241,0.12)' : 'rgba(255,255,255,0.02)',
-                          border: `1px solid ${isSelected ? 'rgba(99,102,241,0.3)' : 'rgba(255,255,255,0.04)'}`,
+                          background: isSelected ? 'rgba(251,146,60,0.12)' : 'rgba(255,255,255,0.02)',
+                          border: `1px solid ${isSelected ? 'rgba(251,146,60,0.3)' : 'rgba(255,255,255,0.04)'}`,
                           transition: 'all 0.2s',
                         }}
                       >
