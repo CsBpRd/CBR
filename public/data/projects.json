@@ -45,6 +45,6 @@
     "description": "面向气象爱好者的台风追踪平台：路径绘制 · 卫星云图 · ADT分析 · 海报工坊。",
     "icon": "fa-tornado",
     "gradient": "linear-gradient(135deg, #5BC0EB, #FFB547)",
-    "link": "https://typhoon-atlas.vercel.app"
+    "link": "/typhoon-atlas/"
   }
 ]
