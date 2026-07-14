@@ -1,1 +1,6 @@
-aW1wb3J0e2MgYXMgb31mcm9tIi4vaW5kZXgtemlNWTlHcXEuanMiOy8qKgogKiBAbGljZW5zZSBsdWNpZGUtcmVhY3QgdjAuNTExLjAgLSBJU0MKICoKICogVGhpcyBzb3VyY2UgY29kZSBpcyBsaWNlbnNlZCB1bmRlciB0aGUgSVNDIGxpY2Vuc2UuCiAqIFNlZSB0aGUgTElDRU5TRSBmaWxlIGluIHRoZSByb290IGRpcmVjdG9yeSBvZiB0aGlzIHNvdXJjZSB0cmVlLgogKi9jb25zdCBlPVtbInBhdGgiLHtkOiJtMTIgMTktNy03IDctNyIsa2V5OiIxbDcyOW4ifV0sWyJwYXRoIix7ZDoiTTE5IDEySDUiLGtleToieDN4MHpsIn1dXSxyPW8oImFycm93LWxlZnQiLGUpO2V4cG9ydHtyIGFzIEF9Owo=
+import{c as o}from"./index-ziMY9Gqq.js";/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const e=[["path",{d:"m12 19-7-7 7-7",key:"1l729n"}],["path",{d:"M19 12H5",key:"x3x0zl"}]],r=o("arrow-left",e);export{r as A};

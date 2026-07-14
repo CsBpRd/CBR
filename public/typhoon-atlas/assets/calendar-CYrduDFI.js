@@ -1,1 +1,6 @@
-aW1wb3J0e2MgYXMgZX1mcm9tIi4vaW5kZXgtemlNWTlHcXEuanMiOy8qKgogKiBAbGljZW5zZSBsdWNpZGUtcmVhY3QgdjAuNTExLjAgLSBJU0MKICoKICogVGhpcyBzb3VyY2UgY29kZSBpcyBsaWNlbnNlZCB1bmRlciB0aGUgSVNDIGxpY2Vuc2UuCiAqIFNlZSB0aGUgTElDRU5TRSBmaWxlIGluIHRoZSByb290IGRpcmVjdG9yeSBvZiB0aGlzIHNvdXJjZSB0cmVlLgogKi9jb25zdCB0PVtbInBhdGgiLHtkOiJNOCAydjQiLGtleToiMWNtcHltIn1dLFsicGF0aCIse2Q6Ik0xNiAydjQiLGtleToiNG04MXZrIn1dLFsicmVjdCIse3dpZHRoOiIxOCIsaGVpZ2h0OiIxOCIseDoiMyIseToiNCIscng6IjIiLGtleToiMWhvcGN5In1dLFsicGF0aCIse2Q6Ik0zIDEwaDE4IixrZXk6Ijh0b2VuOCJ9XV0sYT1lKCJjYWxlbmRhciIsdCk7ZXhwb3J0e2EgYXMgQ307Cg==
+import{c as e}from"./index-ziMY9Gqq.js";/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const t=[["path",{d:"M8 2v4",key:"1cmpym"}],["path",{d:"M16 2v4",key:"4m81vk"}],["rect",{width:"18",height:"18",x:"3",y:"4",rx:"2",key:"1hopcy"}],["path",{d:"M3 10h18",key:"8toen8"}]],a=e("calendar",t);export{a as C};
