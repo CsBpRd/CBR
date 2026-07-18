@@ -1,12 +1,29 @@
-import{c as T,u as _,j as e,h as j,b as s,k as z,l as G}from"./index-B_e_Vg8A.js";import{r as a}from"./react-vendor-Dge95ISX.js";import{M as O,T as q,W,u as Z}from"./leaflet-By2H_Fao.js";import{C as H}from"./calendar-B4Gp4vTh.js";import{L as K}from"./layers-B4Nf1Hxv.js";import{C as U}from"./cloud-BDGdgPgk.js";import"./zustand-D6VqJhMD.js";/**
+import{c as T,u as _,j as e,h as j,b as s,k as z,l as G}from"./index-B_e_Vg8A.js";import{r as a}from"./react-vendor-Dge95ISX.js";import{M as O,T as LT,W as WM,L as CRS,u as Z}from"./leaflet-By2H_Fao.js";import{C as H}from"./calendar-B4Gp4vTh.js";import{L as K}from"./layers-B4Nf1Hxv.js";import{C as U}from"./cloud-BDGdgPgk.js";import"./zustand-D6VqJhMD.js";/**
  * @license lucide-react v0.511.0 - ISC
  */const $=[["path",{d:"m15 18-6-6 6-6",key:"1wnfg3"}]],J=T("chevron-left",$);const Q=[["path",{d:"m9 18 6-6-6-6",key:"mthhwq"}]],X=T("chevron-right",Q);
-const TARGET_TIMES_URL="https://www.jma.go.jp/bosai/himawari/data/satimg/targetTimes_fd.json";
-const TILE_BASE="https://www.jma.go.jp/bosai/himawari/data/satimg";
+const JMA_TARGET_TIMES_URL="https://www.jma.go.jp/bosai/himawari/data/satimg/targetTimes_fd.json";
+const JMA_TILE_BASE="https://www.jma.go.jp/bosai/himawari/data/satimg";
+const NASA_WMS_URL="https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi";
 const DARK_BASE="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
 const LIGHT_BASE="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
-const CHANNELS=[{id:"tc",name:"真彩色",band:"SND",product:"ETC",desc:"Himawari-8 真彩色",color:"#3CB371"},{id:"vis",name:"可见光",band:"B03",product:"ALBD",desc:"Himawari-8 可见光",color:"#5BC0EB"},{id:"ir",name:"红外",band:"B13",product:"TBB",desc:"Himawari-8 红外",color:"#E63946"},{id:"wv",name:"水汽",band:"B08",product:"TBB",desc:"Himawari-8 水汽",color:"#9B5DE5"}];
-const BOUNDS=[[-15,80],[55,180]];
+
+const JMA_BOUNDS=[[-15,80],[55,180]];
+const NASA_BOUNDS=[[-15,70],[55,180]];
+
+const JMA_CHANNELS=[
+  {id:"tc",name:"真彩色",band:"SND",product:"ETC",desc:"Himawari-8 真彩色",color:"#3CB371"},
+  {id:"vis",name:"可见光",band:"B03",product:"ALBD",desc:"Himawari-8 可见光",color:"#5BC0EB"},
+  {id:"ir",name:"红外",band:"B13",product:"TBB",desc:"Himawari-8 红外",color:"#E63946"},
+  {id:"wv",name:"水汽",band:"B08",product:"TBB",desc:"Himawari-8 水汽",color:"#9B5DE5"}
+];
+
+const NASA_CHANNELS=[
+  {id:"vis",name:"可见光",layer:"MODIS_Terra_CorrectedReflectance_TrueColor",desc:"MODIS Terra 真彩色",format:"image/jpeg",color:"#5BC0EB"},
+  {id:"aqua",name:"Aqua真彩",layer:"MODIS_Aqua_CorrectedReflectance_TrueColor",desc:"MODIS Aqua 真彩色",format:"image/jpeg",color:"#3CB371"},
+  {id:"b721",name:"721假彩",layer:"MODIS_Terra_CorrectedReflectance_Bands721",desc:"7-2-1 波段组合",format:"image/jpeg",color:"#E63946"},
+  {id:"wv",name:"水汽",layer:"MODIS_Terra_Water_Vapor",desc:"MODIS 水汽通道",format:"image/png",color:"#9B5DE5"},
+  {id:"rain",name:"降水率",layer:"GPM_IMERG_RainRate",desc:"GPM IMERG 降水率",format:"image/png",color:"#06AED5"}
+];
 
 function getPastDates(){
   const d=[],r=new Date;
@@ -34,14 +51,21 @@ function findNearestTime(times,dateStr){
   return best||times[times.length-1]?.validtime;
 }
 
-function MapFitter({resetKey}){
+function MapFitter({source,resetKey}){
   const map=Z();
-  a.useEffect(()=>{map.setView([20,130],4,{animate:false});},[map,resetKey]);
+  a.useEffect(()=>{
+    if(source==="jma"){
+      map.setView([20,130],4,{animate:false});
+    }else{
+      map.fitBounds(NASA_BOUNDS,{padding:[10,10]});
+    }
+  },[map,source,resetKey]);
   return null;
 }
 
 function SatellitePage(){
   const isLight=_(t=>t.theme)==="light";
+  const [source,setSource]=a.useState("jma");
   const [channel,setChannel]=a.useState("tc");
   const [dateIdx,setDateIdx]=a.useState(0);
   const [playing,setPlaying]=a.useState(false);
@@ -50,29 +74,46 @@ function SatellitePage(){
   const [loading,setLoading]=a.useState(true);
   const raf=a.useRef(null);
 
+  const isJma=source==="jma";
+  const CHANNELS=isJma?JMA_CHANNELS:NASA_CHANNELS;
+  const BOUNDS=isJma?JMA_BOUNDS:NASA_BOUNDS;
+
   a.useEffect(()=>{
+    setChannel(CHANNELS[0].id);
+    setDateIdx(0);
+    setPlaying(false);
+  },[source,CHANNELS]);
+
+  a.useEffect(()=>{
+    if(!isJma){setLoading(false);setTimes([]);return;}
     let active=true;
-    fetch(TARGET_TIMES_URL)
+    setLoading(true);
+    fetch(JMA_TARGET_TIMES_URL)
       .then(r=>r.json())
       .then(data=>{if(active)setTimes(data);})
       .catch(()=>{if(active)setTimes([]);})
       .finally(()=>{if(active)setLoading(false);});
     return()=>{active=false;};
-  },[]);
+  },[isJma]);
 
-  const currentChannel=a.useMemo(()=>CHANNELS.find(t=>t.id===channel)||CHANNELS[0],[channel]);
+  const currentChannel=a.useMemo(()=>CHANNELS.find(t=>t.id===channel)||CHANNELS[0],[channel,CHANNELS]);
   const currentDate=DATES[dateIdx];
   const currentTime=a.useMemo(()=>{
-    if(!times.length)return null;
+    if(!isJma||!times.length)return null;
     return findNearestTime(times,currentDate);
-  },[times,currentDate]);
+  },[isJma,times,currentDate]);
 
   const cloudUrl=a.useMemo(()=>{
-    if(!currentTime)return"";
-    return `${TILE_BASE}/${currentTime}/fd/${currentTime}/${currentChannel.band}/${currentChannel.product}/{z}/{x}/{y}.jpg`;
-  },[currentTime,currentChannel]);
+    if(!isJma||!currentTime)return"";
+    return `${JMA_TILE_BASE}/${currentTime}/fd/${currentTime}/${currentChannel.band}/${currentChannel.product}/{z}/{x}/{y}.jpg`;
+  },[isJma,currentTime,currentChannel]);
 
-  const resetKey=channel+"-"+currentDate;
+  const wmsParams=a.useMemo(()=>{
+    if(isJma)return null;
+    return {layers:currentChannel.layer,format:currentChannel.format,transparent:currentChannel.format==="image/png",version:"1.3.0",TIME:currentDate};
+  },[isJma,currentChannel,currentDate]);
+
+  const resetKey=source+"-"+channel+"-"+currentDate;
 
   a.useEffect(()=>{
     if(!playing)return;
@@ -110,18 +151,24 @@ function SatellitePage(){
           e.jsx("span",{className:s("font-mono text-xs px-2 py-0.5 border",isLight?"bg-amber-50 text-amber-700 border-amber-300":"text-storm bg-storm/10 border-storm/30"),children:"SAT.02"}),
           e.jsx("h2",{className:s("font-mono text-2xl font-bold tracking-tight",isLight?"text-slate-900":"text-slate-100"),children:"卫星云图"})
         ]}),
-        e.jsx("p",{className:s("text-sm max-w-2xl",D),children:"JMA Himawari-8 · 4 通道 · 近 7 天回溯"})
+        e.jsx("p",{className:s("text-sm max-w-2xl",D),children:isJma?"JMA Himawari-8 · 4 通道 · 近 7 天回溯":"NASA GIBS · 5 通道 · 近 7 天回溯"})
       ]})
     ]})}),
     e.jsxs("div",{className:"grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4",children:[
       e.jsxs("div",{className:"space-y-3",children:[
         e.jsx("div",{className:s("relative w-full overflow-hidden border",isLight?"border-slate-300":"border-ice/15"),style:{height:"520px",backgroundColor:isLight?"#dbeafe":"#0a1628"},children:
-          e.jsxs(O,{center:[20,125],zoom:3,minZoom:2,maxZoom:8,maxBounds:BOUNDS,maxBoundsViscosity:1,className:"w-full h-full",scrollWheelZoom:true,zoomControl:true,preferCanvas:true,attributionControl:false,children:[
-            e.jsx(MapFitter,{resetKey}),
-            e.jsx(q,{url:isLight?LIGHT_BASE:DARK_BASE,subdomains:"abcd",attribution:"",opacity:1}),
-            loading||!cloudUrl?null:e.jsx(q,{key:resetKey,url:cloudUrl,attribution:"",opacity:1,maxNativeZoom:6})
-          ]})
+          e.jsxs(O,Object.assign({key:source,center:[20,125],zoom:3,minZoom:2,maxZoom:isJma?8:5,maxBounds:BOUNDS,maxBoundsViscosity:1,className:"w-full h-full",scrollWheelZoom:true,zoomControl:true,preferCanvas:true,attributionControl:false},isJma?{}:{crs:CRS.CRS.EPSG4326},{children:[
+            e.jsx(MapFitter,{source,resetKey}),
+            isJma?e.jsx(LT,{url:isLight?LIGHT_BASE:DARK_BASE,subdomains:"abcd",attribution:"",opacity:1}):null,
+            isJma
+              ?(loading||!cloudUrl?null:e.jsx(LT,{key:resetKey,url:cloudUrl,attribution:"",opacity:1,maxNativeZoom:6}))
+              :e.jsx(WM,{key:resetKey,url:NASA_WMS_URL,crs:CRS.CRS.EPSG4326,params:wmsParams,opacity:1})
+          ]}))
         }),
+        e.jsx("div",{className:s("flex flex-wrap gap-1.5 p-2 border",isLight?"bg-white/70 border-slate-300":"terminal-card"),children:[
+          e.jsxs("button",{onClick:()=>setSource("jma"),className:s("px-3 py-1.5 font-mono text-xs border transition-all",isJma?b:g),children:"JMA"}),
+          e.jsxs("button",{onClick:()=>setSource("nasa"),className:s("px-3 py-1.5 font-mono text-xs border transition-all",!isJma?b:g),children:"NASA"})
+        ]}),
         e.jsx("div",{className:s("flex flex-wrap gap-1.5 p-2 border",isLight?"bg-white/70 border-slate-300":"terminal-card"),children:CHANNELS.map(t=>e.jsxs("button",{onClick:()=>setChannel(t.id),className:s("flex items-center gap-1.5 px-3 py-1.5 font-mono text-xs border transition-all",t.id===channel?b:g),children:[
           e.jsx("span",{className:"w-2 h-2 rounded-full",style:{backgroundColor:t.color}}),t.name
         ]},t.id))}),
@@ -159,8 +206,8 @@ function SatellitePage(){
             ]}),
             e.jsx("p",{className:s("font-mono text-[10px] leading-relaxed",D),children:currentChannel.desc}),
             e.jsxs("div",{className:s("pt-2 border-t font-mono text-[10px] space-y-0.5",isLight?"border-slate-200 text-slate-500":"border-ice/10 text-slate-500"),children:[
-              e.jsx("div",{children:"区域: 15S-55N, 80-180E"}),
-              e.jsx("div",{children:"数据源: JMA Himawari-8"}),
+              e.jsx("div",{children:isJma?"区域: 15S-55N, 80-180E":"区域: 15S-55N, 70-180E"}),
+              e.jsx("div",{children:isJma?"数据源: JMA Himawari-8":"数据源: NASA GIBS WMS"}),
               e.jsxs("div",{children:["日期: ",currentDate]}),
               e.jsxs("div",{className:"flex items-center gap-1 mt-1",children:[
                 e.jsx(U,{size:10}),
