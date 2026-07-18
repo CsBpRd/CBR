@@ -5,8 +5,8 @@ const TARGET_TIMES_URL="https://www.jma.go.jp/bosai/himawari/data/satimg/targetT
 const TILE_BASE="https://www.jma.go.jp/bosai/himawari/data/satimg";
 const DARK_BASE="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
 const LIGHT_BASE="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
-const CHANNELS=[{id:"tc",name:"真彩色",band:"REP",product:"ETC",desc:"Himawari-8 真彩色",color:"#3CB371"},{id:"vis",name:"可见光",band:"B03",product:"ALBD",desc:"Himawari-8 可见光",color:"#5BC0EB"},{id:"ir",name:"红外",band:"B13",product:"TBB",desc:"Himawari-8 红外",color:"#E63946"},{id:"wv",name:"水汽",band:"B08",product:"TBB",desc:"Himawari-8 水汽",color:"#9B5DE5"}];
-const BOUNDS=[[-15,70],[55,180]];
+const CHANNELS=[{id:"tc",name:"真彩色",band:"SND",product:"ETC",desc:"Himawari-8 真彩色",color:"#3CB371"},{id:"vis",name:"可见光",band:"B03",product:"ALBD",desc:"Himawari-8 可见光",color:"#5BC0EB"},{id:"ir",name:"红外",band:"B13",product:"TBB",desc:"Himawari-8 红外",color:"#E63946"},{id:"wv",name:"水汽",band:"B08",product:"TBB",desc:"Himawari-8 水汽",color:"#9B5DE5"}];
+const BOUNDS=[[-15,80],[55,180]];
 
 function getPastDates(){
   const d=[],r=new Date;
@@ -36,7 +36,7 @@ function findNearestTime(times,dateStr){
 
 function MapFitter({resetKey}){
   const map=Z();
-  a.useEffect(()=>{map.fitBounds(BOUNDS,{padding:[10,10]});},[map,resetKey]);
+  a.useEffect(()=>{map.setView([20,130],4,{animate:false});},[map,resetKey]);
   return null;
 }
 
@@ -72,7 +72,7 @@ function SatellitePage(){
     return `${TILE_BASE}/${currentTime}/fd/${currentTime}/${currentChannel.band}/${currentChannel.product}/{z}/{x}/{y}.jpg`;
   },[currentTime,currentChannel]);
 
-  const resetKey=channel+"-"+currentDate+"-"+currentTime;
+  const resetKey=channel+"-"+currentDate;
 
   a.useEffect(()=>{
     if(!playing)return;
@@ -159,7 +159,7 @@ function SatellitePage(){
             ]}),
             e.jsx("p",{className:s("font-mono text-[10px] leading-relaxed",D),children:currentChannel.desc}),
             e.jsxs("div",{className:s("pt-2 border-t font-mono text-[10px] space-y-0.5",isLight?"border-slate-200 text-slate-500":"border-ice/10 text-slate-500"),children:[
-              e.jsx("div",{children:"区域: 15S-55N, 70-180E"}),
+              e.jsx("div",{children:"区域: 15S-55N, 80-180E"}),
               e.jsx("div",{children:"数据源: JMA Himawari-8"}),
               e.jsxs("div",{children:["日期: ",currentDate]}),
               e.jsxs("div",{className:"flex items-center gap-1 mt-1",children:[
