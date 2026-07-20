@@ -9,7 +9,7 @@
 
 | 序号 | 数据用途 | 提供方 | 接入协议 / 原文 URL | 官方授权条款 | 使用合规性说明 |
 |---|---|---|---|---|---|
-| 1 | 台风路径实况与历史数据 | 浙江省水利厅 · 防汛台风网 | REST API · HTTP GET JSON  <br>`https://typhoon.slt.zj.gov.cn/Api/TyphoonList/{year}`  <br>`https://typhoon.slt.zj.gov.cn/Api/TyphoonInfo/{tfid}` | 浙江省政府主动公开的政务数据，适用《浙江省公共数据开放与安全管理暂行办法》（https://edu.hangzhou.gov.cn/art/2024/8/17/art_1229595606_58943349.html） | 本应用仅读取公开 API 展示台风路径，未爬取非公开页面、未破解鉴权、未超出公开访问范围。 |
+| 1 | 台风路径实况与历史数据 | 浙江省水利厅 · 防汛台风网 | REST API · HTTP GET JSON  <br>`https://typhoon.slt.zj.gov.cn/Api/TyphoonList/{year}`  <br>`https://typhoon.slt.zj.gov.cn/Api/TyphoonInfo/{tfid}` | 浙江省政府主动公开的政务数据，适用《浙江省公共数据开放与安全管理暂行办法》（浙江省人民政府令第 381 号，2020 年 8 月 1 日起施行）。官方文本见中国政府网转载：https://www.gov.cn/zhengce/2021-12/21/content_5719109.htm | 本应用仅读取公开 API 展示台风路径，未爬取非公开页面、未破解鉴权、未超出公开访问范围。 |
 | 2 | 实时天气（温度/湿度/体感/气压/风速风向/天气现象） | Open-Meteo | REST API · HTTP GET JSON  <br>`https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current=...&timezone=Asia/Shanghai` | Open-Meteo License: https://open-meteo.com/en/license  <br>Open-Meteo Terms: https://open-meteo.com/en/terms | 免费 API 用于非商业用途，每日调用量远低于 10 000 次上限；页面已按 CC BY 4.0 要求标注来源。 |
 | 3 | 7日逐时/逐日预报 | Open-Meteo | REST API · HTTP GET JSON  <br>`https://api.open-meteo.com/v1/forecast?...&daily=...&forecast_days=7` | 同上 | 同上。 |
 | 4 | ECMWF IFS 数值预报 | Open-Meteo（转接 ECMWF 开放数据） | REST API · HTTP GET JSON  <br>`https://api.open-meteo.com/v1/forecast?...&models=ecmwf_ifs025&forecast_days=7` | Open-Meteo License 与 ECMWF Open Data Licence: https://www.ecmwf.int/en/forecasts/datasets/open-data | 使用 Open-Meteo 免费非商业接口，且按要求在页面中标注 ECMWF / Open-Meteo 来源。 |
@@ -85,13 +85,22 @@
 
 ### 2.5 浙江省水利厅台风数据（条目 1）
 
-**政策依据**：《浙江省公共数据开放与安全管理暂行办法》（浙江省人民政府令第 381 号，2024 年施行）  
-https://edu.hangzhou.gov.cn/art/2024/8/17/art_1229595606_58943349.html
+**政策依据**：《浙江省公共数据开放与安全管理暂行办法》（浙江省人民政府令第 381 号，2020 年 8 月 1 日起施行）  
+官方文本（中国政府网转载）：https://www.gov.cn/zhengce/2021-12/21/content_5719109.htm
 
-> 浙江省水利厅官网台风路径系统（https://typhoon.slt.zj.gov.cn/）以政府主动公开方式提供台风路径信息，面向全社会公开。
+> **第六条** 公共数据开放应当遵循依法开放的原则，法律、法规、规章以及国家规定要求开放或者规定可以开放的，应当开放；未明确开放的，应当安全有序开放；禁止开放的，不得开放。
+>
+> **第七条** 公共数据开放主体应当根据本地区经济社会发展情况，重点和优先开放下列公共数据：……（二）自然资源、生态环境、交通出行、**气象**等数据；……
+>
+> **第八条** 突发自然灾害、事故灾难、公共卫生事件和社会安全事件，造成或者可能造成严重社会危害、直接影响社会公众切身利益的，负责处置突发事件的各级人民政府及其有关部门应当依法及时、准确开放相关公共数据，并根据公众需要动态更新。
+>
+> **第二十条** 公共数据开放主体可以通过下列方式开放公共数据：……（二）**接口调用数据**；……
+>
+> **第二十七条** 除法律、法规、规章另有规定外，公共数据开放主体应当免费开放下列公共数据：（一）**无条件开放的数据**；……
 
 **合规要点**：
-- 本应用通过公开 API 读取政府主动公开的台风路径数据；
+- 浙江省水利厅官网台风路径系统（https://typhoon.slt.zj.gov.cn/）以政府主动公开方式提供台风路径信息，属于《办法》第六条、第七条、第八条规定的可开放公共数据；
+- 本应用通过其公开 API（接口调用，符合第二十条）读取数据，且该数据属于无条件开放类，应免费开放（第二十七条）；
 - 未访问非公开接口、未突破访问限制、未用于违法违规用途；
 - 页面已标注数据来源为浙江省水利厅。
 
