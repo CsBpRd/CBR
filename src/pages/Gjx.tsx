@@ -60,7 +60,7 @@ export default function Gjx() {
         <div style={{ background: 'var(--bg-card)', borderRadius: 20, padding: 50, maxWidth: 800, margin: '0 auto', boxShadow: 'var(--shadow)' }}>
           <h2 style={{ fontSize: '2rem', marginBottom: 20 }}>立即体验CBR工具箱</h2>
           <p style={{ color: 'var(--text-secondary)', marginBottom: 30, fontSize: '1.1rem' }}>清爽界面，功能强大，让你的工作更加高效</p>
-          <a href="/install.msi" className="btn" download>
+          <a href="https://raw.githubusercontent.com/CsBpRd/CBR/main/repo-files/install.msi" className="btn" download>
             <i className="fas fa-download"></i> 立即下载 (Windows)
           </a>
           <p style={{ marginTop: 20, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
