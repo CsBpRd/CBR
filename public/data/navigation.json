@@ -20,6 +20,10 @@
     "path": "/tonglan"
   },
   {
+    "label": "TextBar",
+    "path": "/textbar"
+  },
+  {
     "label": "照片筛选器",
     "path": "/photopicker.html"
   },

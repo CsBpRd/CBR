@@ -32,6 +32,14 @@
     "link": "/tonglan"
   },
   {
+    "id": "textbar",
+    "title": "TextBar",
+    "description": "macOS 菜单栏自定义文本工具：时间日期变量渲染、FiveNotes 式记事本、左键快捷动作、DeepSeek 余额查询。",
+    "icon": "fa-i-cursor",
+    "gradient": "linear-gradient(135deg, #f97316, #fb923c)",
+    "link": "/textbar"
+  },
+  {
     "id": "photopicker",
     "title": "照片筛选器",
     "description": "智能照片筛选工具，轻松管理和筛选你的图片库，快速找到想要的图片。",

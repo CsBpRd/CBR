@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Gjx from './pages/Gjx'
 import Pu from './pages/Pu'
 import Tonglan from './pages/Tonglan'
+import TextBar from './pages/TextBar'
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/gjx" element={<Gjx />} />
         <Route path="/pu" element={<Pu />} />
         <Route path="/tonglan" element={<Tonglan />} />
+        <Route path="/textbar" element={<TextBar />} />
       </Routes>
       <Footer />
     </>
