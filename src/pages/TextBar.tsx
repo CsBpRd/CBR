@@ -3,7 +3,7 @@ import ParticleBg from '../components/ParticleBg'
 
 const features = [
   { icon: 'fa-clock', title: '时间变量渲染', description: '菜单栏直接显示 {HH:mm:ss} {yyyy-MM-dd} {greet} 等变量，任意格式自由组合，秒级实时刷新。', color: '#f97316' },
-  { icon: 'fa-sticky-note', title: 'FiveNotes 式记事本', description: '按下即弹出，5 色笔记快速切换，自动保存到本地，随写随记。', color: '#fb923c' },
+  { icon: 'fa-sticky-note', title: '快捷记事本', description: '按下即弹出，5 色笔记快速切换，自动保存到本地，随写随记。', color: '#fb923c' },
   { icon: 'fa-mouse-pointer', title: '左键动作', description: '左键可配置为打开任意 App、文档、网页或记事本，右键打开设置。', color: '#fbbf24' },
   { icon: 'fa-palette', title: '高度自定义', description: '字体、字号、粗体、文字颜色、背景颜色全部可调，一键恢复默认。', color: '#22c55e' },
   { icon: 'fa-coins', title: '余额查询', description: '支持 {ds_balance} 显示 DeepSeek API 充值余额，钥匙串安全存储密钥。', color: '#f59e0b' },
@@ -24,7 +24,7 @@ export default function TextBar() {
         <h1 style={{ marginBottom: 16, color: 'var(--accent-primary)' }}>
           TextBar
         </h1>
-        <p>macOS 菜单栏自定义文本工具：时间日期变量渲染、FiveNotes 式记事本、左键快捷动作，一切尽在菜单栏。</p>
+        <p>macOS 菜单栏自定义文本工具：时间日期变量渲染、快捷记事本、左键快捷动作，一切尽在菜单栏。</p>
         <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
           <a href="https://github.com/CsBpRd/TextBar/releases/latest" className="btn" target="_blank">
             <i className="fas fa-download"></i> 立即下载

@@ -34,7 +34,7 @@
   {
     "id": "textbar",
     "title": "TextBar",
-    "description": "macOS 菜单栏自定义文本工具：时间日期变量渲染、FiveNotes 式记事本、左键快捷动作、DeepSeek 余额查询。",
+    "description": "macOS 菜单栏自定义文本工具：时间日期变量渲染、快捷记事本、左键快捷动作、DeepSeek 余额查询。",
     "icon": "fa-i-cursor",
     "gradient": "linear-gradient(135deg, #f97316, #fb923c)",
     "link": "/textbar"
