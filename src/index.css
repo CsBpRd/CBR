@@ -36,7 +36,7 @@ body {
 /* Theme Toggle */
 .theme-toggle {
   background: transparent; border: 1px solid var(--border-color);
-  border-radius: 10px; width: 40px; height: 40px; margin-left: 12px;
+  border-radius: 10px; width: 40px; height: 40px; margin-left: 30px;
   display: inline-flex; align-items: center; justify-content: center;
   cursor: pointer; transition: all 0.3s; color: var(--text-secondary);
   font-size: 1rem; flex-shrink: 0;
