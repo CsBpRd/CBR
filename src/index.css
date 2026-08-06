@@ -35,14 +35,13 @@ body {
 
 /* Theme Toggle */
 .theme-toggle {
-  position: fixed; top: 20px; right: 20px; z-index: 1000;
-  background: var(--bg-card); border: 1px solid var(--border-color);
-  border-radius: 50%; width: 50px; height: 50px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; box-shadow: var(--shadow); transition: all 0.3s;
-  color: var(--text-primary);
+  background: transparent; border: 1px solid var(--border-color);
+  border-radius: 10px; width: 40px; height: 40px; margin-left: 12px;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.3s; color: var(--text-secondary);
+  font-size: 1rem; flex-shrink: 0;
 }
-.theme-toggle:hover { transform: scale(1.1); }
+.theme-toggle:hover { color: var(--accent-primary); background: rgba(251, 146, 60, 0.12); }
 
 /* Navbar */
 nav {
@@ -50,7 +49,7 @@ nav {
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(148, 163, 184, 0.14);
-  padding: 20px 70px 20px 20px;
+  padding: 20px;
   box-shadow: 0 4px 24px -8px rgba(0, 0, 0, 0.3);
   position: fixed; top: 0; width: 100%; z-index: 999;
 }
@@ -68,6 +67,7 @@ nav {
   display: flex; align-items: center; gap: 8px;
 }
 .nav-links { display: flex; gap: 30px; }
+.nav-links { margin-left: auto; }
 .nav-links a {
   color: var(--text-secondary); text-decoration: none;
   transition: color 0.3s, background 0.3s; font-size: 0.95rem;
@@ -237,7 +237,7 @@ footer a { color: var(--accent-primary); text-decoration: none; }
 
 @media (max-width: 768px) {
   /* Nav */
-  nav { padding: 16px 60px 16px 16px; }
+  nav { padding: 16px; }
   .nav-toggle { display: flex !important; align-items: center; justify-content: center; }
   .nav-container { flex-wrap: wrap; }
   .nav-links {
@@ -290,7 +290,7 @@ footer a { color: var(--accent-primary); text-decoration: none; }
   footer { padding: 40px 16px; }
 
   /* Theme toggle */
-  .theme-toggle { top: 12px; right: 12px; width: 40px; height: 40px; }
+  .theme-toggle { margin-left: 8px; }
 
   /* Hide particles on mobile */
   canvas[style*="z-index: -1"] { display: none; }

@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import ThemeToggle from './components/ThemeToggle'
 import Home from './pages/Home'
 import Gjx from './pages/Gjx'
 import Pu from './pages/Pu'
@@ -11,7 +10,6 @@ import TextBar from './pages/TextBar'
 export default function App() {
   return (
     <>
-      <ThemeToggle />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

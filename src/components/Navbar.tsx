@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import ThemeToggle from './ThemeToggle'
 
 interface NavItem {
   label: string
@@ -50,6 +51,7 @@ export default function Navbar() {
             )
           )}
         </div>
+        <ThemeToggle />
       </div>
     </nav>
   )
