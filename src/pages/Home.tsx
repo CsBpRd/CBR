@@ -23,7 +23,7 @@ export default function Home() {
       <ParticleBg />
       <header style={{ textAlign: 'center', padding: '180px 20px 80px', position: 'relative' }}>
         <div style={{ maxWidth: 800, margin: '0 auto' }}>
-          <h1 className="home-title" style={{ color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: 4 }}>
+          <h1 className="home-title" style={{ textTransform: 'uppercase', letterSpacing: 4 }}>
             CSBPRD
           </h1>
           <p style={{ fontSize: '1.5rem', opacity: 0.9, marginBottom: 30 }}>这里是陈伯睿的个人主页</p>
