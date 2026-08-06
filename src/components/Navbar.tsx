@@ -35,7 +35,7 @@ export default function Navbar() {
         </button>
         <div className={`nav-links${menuOpen ? ' open' : ''}`}>
           {items.map(item =>
-            item.path.endsWith('.html') ? (
+            item.path.startsWith('http') ? (
               <a key={item.path} href={item.path} onClick={closeMenu}>{item.label}</a>
             ) : (
               <NavLink

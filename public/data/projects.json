@@ -21,7 +21,7 @@
     "description": "精心设计的浏览器起始页，让你每次打开浏览器都能拥有愉悦的心情和高效的工作体验。",
     "icon": "fa-home",
     "gradient": "#fdba74",
-    "link": "/zgmzpage.html"
+    "link": "https://zgmz.csbprd.top"
   },
   {
     "id": "tonglan",
@@ -45,7 +45,7 @@
     "description": "智能照片筛选工具，轻松管理和筛选你的图片库，快速找到想要的图片。",
     "icon": "fa-images",
     "gradient": "#fdba74",
-    "link": "/photopicker.html"
+    "link": "https://photopicker.csbprd.top"
   },
   {
     "id": "typhoon-atlas",
@@ -53,6 +53,6 @@
     "description": "面向气象爱好者的台风追踪平台：路径绘制 · 卫星云图 · ADT分析 · 海报工坊。",
     "icon": "fa-tornado",
     "gradient": "linear-gradient(135deg, #5BC0EB, #FFB547)",
-    "link": "/typhoon-atlas/index.html"
+    "link": "https://typhoon.csbprd.top"
   }
 ]

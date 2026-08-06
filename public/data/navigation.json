@@ -13,7 +13,7 @@
   },
   {
     "label": "ZGMZ起始页",
-    "path": "/zgmzpage.html"
+    "path": "https://zgmz.csbprd.top"
   },
   {
     "label": "通览",
@@ -25,10 +25,10 @@
   },
   {
     "label": "照片筛选器",
-    "path": "/photopicker.html"
+    "path": "https://photopicker.csbprd.top"
   },
   {
     "label": "风暴志",
-    "path": "/typhoon-atlas/index.html"
+    "path": "https://typhoon.csbprd.top"
   }
 ]
