@@ -449,8 +449,8 @@ body {
   background-color: #EFEEEE;
 }
 .welcome-slides {
-  min-height: 300px;
-  padding: 36px 34px 0;
+  min-height: 235px;
+  padding: 24px 30px 0;
   overflow: hidden;
 }
 .welcome-slide {
@@ -465,19 +465,6 @@ body {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.welcome-icon {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 16px;
-  border-radius: 50%;
-  background-color: #EFEEEE;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 30px;
-  box-shadow: 4px 4px 8px rgba(0,0,0,0.15),
-              -4px -4px 8px rgba(255,255,255,0.9);
-}
 .welcome-modal h3 {
   font-size: 20px;
   color: #444;
@@ -486,7 +473,7 @@ body {
 .welcome-sub {
   font-size: 13px;
   color: #999;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 .welcome-list {
   list-style: none;
@@ -495,7 +482,7 @@ body {
 }
 .welcome-list li {
   position: relative;
-  padding: 8px 0 8px 20px;
+  padding: 7px 0 7px 20px;
   font-size: 14px;
   color: #555;
   border-bottom: 1px dashed rgba(0,0,0,0.08);
@@ -507,7 +494,7 @@ body {
   content: '';
   position: absolute;
   left: 4px;
-  top: 15px;
+  top: 14px;
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -519,7 +506,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 8px;
-  padding: 20px 0 0;
+  padding: 16px 0 0;
 }
 .welcome-dot {
   width: 8px;
@@ -538,7 +525,7 @@ body {
 }
 .welcome-footer {
   justify-content: center;
-  padding: 18px 0 26px;
+  padding: 14px 0 22px;
 }
 #welcomeNextBtn {
   min-width: 140px;
