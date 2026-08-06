@@ -18,8 +18,8 @@ export default function ParticleBg() {
     let W = 0, H = 0
     let mouseX = -9999, mouseY = -9999
     let particles: Particle[] = []
-    const COUNT = 80
-    const MAX_DIST = 150
+    const COUNT = 45
+    const MAX_DIST = 120
     const MOUSE_RADIUS = 250
     const ATTRACT_FORCE = 0.12
 
@@ -43,6 +43,8 @@ export default function ParticleBg() {
         opacity: Math.random() * 0.3 + 0.2
       })
     }
+
+    let rafId = 0
 
     function animate() {
       ctx.clearRect(0, 0, W, H)
@@ -112,7 +114,7 @@ export default function ParticleBg() {
         ctx.fill()
       }
 
-      requestAnimationFrame(animate)
+      rafId = requestAnimationFrame(animate)
     }
 
     animate()
@@ -129,6 +131,7 @@ export default function ParticleBg() {
     window.addEventListener('mouseleave', onMouseLeave)
 
     return () => {
+      cancelAnimationFrame(rafId)
       window.removeEventListener('resize', resize)
       window.removeEventListener('mousemove', onMouseMove)
       window.removeEventListener('mouseleave', onMouseLeave)

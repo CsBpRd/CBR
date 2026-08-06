@@ -4,14 +4,18 @@ export default function Pu() {
   return (
     <div>
       <ParticleBg />
-      <section className="hero" style={{ padding: '120px 20px 60px' }}>
-        <h1 style={{ color: 'var(--accent-primary)' }}>
-          <i className="fas fa-window-restore"></i> PPT ULTRA
-        </h1>
-        <p style={{ fontSize: '1.5rem', marginTop: 16 }}>AI灵感 一键获得</p>
-        <a href="#download" className="btn" style={{ marginTop: 24 }}>
-          立即体验 <i className="fas fa-play"></i>
-        </a>
+      <section className="hero" style={{ padding: '180px 20px 80px' }}>
+        <div style={{ maxWidth: 800, margin: '0 auto' }}>
+          <h1 style={{ marginBottom: 16 }}>
+            <i className="fas fa-window-restore"></i> PPT ULTRA
+          </h1>
+          <p style={{ fontSize: '1.5rem', opacity: 0.9 }}>AI灵感 一键获得</p>
+          <div className="hero-btns">
+            <a href="#download" className="btn">
+              立即体验 <i className="fas fa-play"></i>
+            </a>
+          </div>
+        </div>
       </section>
 
       <section style={{ maxWidth: 1200, margin: '0 auto', padding: '60px 20px 0' }}>

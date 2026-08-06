@@ -14,24 +14,26 @@ export default function TextBar() {
   return (
     <div>
       <ParticleBg />
-      <section className="hero" style={{ padding: '140px 20px 80px' }}>
-        <img
-          src="/textbar-icon.png"
-          alt="TextBar"
-          style={{ width: 100, height: 100, borderRadius: 22, marginBottom: 24, boxShadow: '0 12px 40px rgba(251,146,60,0.3)' }}
-          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
-        />
-        <h1 style={{ marginBottom: 16, color: 'var(--accent-primary)' }}>
-          TextBar
-        </h1>
-        <p>macOS 菜单栏自定义文本工具：时间日期变量渲染、快捷记事本、左键快捷动作，一切尽在菜单栏。</p>
-        <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="https://github.com/CsBpRd/TextBar/releases/latest" className="btn" target="_blank">
-            <i className="fas fa-download"></i> 立即下载
-          </a>
-          <a href="https://github.com/CsBpRd/TextBar" className="btn btn-outline" target="_blank">
-            <i className="fab fa-github"></i> 查看源码
-          </a>
+      <section className="hero" style={{ padding: '180px 20px 80px' }}>
+        <div style={{ maxWidth: 800, margin: '0 auto' }}>
+          <img
+            src="/textbar-icon.png"
+            alt="TextBar"
+            style={{ width: 100, height: 100, borderRadius: 22, marginBottom: 24, boxShadow: '0 12px 40px rgba(251,146,60,0.3)' }}
+            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+          />
+          <h1 style={{ marginBottom: 16 }}>
+            TextBar
+          </h1>
+          <p style={{ fontSize: '1.5rem', opacity: 0.9 }}>macOS 菜单栏自定义文本工具：时间日期变量渲染、快捷记事本、左键快捷动作，一切尽在菜单栏。</p>
+          <div className="hero-btns">
+            <a href="https://github.com/CsBpRd/TextBar/releases/latest" className="btn" target="_blank">
+              <i className="fas fa-download"></i> 立即下载
+            </a>
+            <a href="https://github.com/CsBpRd/TextBar" className="btn btn-outline" target="_blank">
+              <i className="fab fa-github"></i> 查看源码
+            </a>
+          </div>
         </div>
       </section>
 

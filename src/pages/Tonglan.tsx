@@ -40,24 +40,26 @@ export default function Tonglan() {
   return (
     <div>
       <ParticleBg />
-      <section className="hero" style={{ padding: '140px 20px 80px' }}>
-        <img
-          src="/tonglan-icon.png"
-          alt="通览"
-          style={{ width: 100, height: 100, borderRadius: 22, marginBottom: 24, boxShadow: '0 12px 40px rgba(251,146,60,0.3)' }}
-          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
-        />
-        <h1 style={{ marginBottom: 16, color: 'var(--accent-primary)' }}>
-          通览
-        </h1>
-        <p>可自定义名称、周期、目录与主题的新闻报告浏览器。支持 HTML、Markdown、纯文本，自动识别文件格式，即开即用。</p>
-        <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="https://github.com/CsBpRd/news-browser/releases/latest" className="btn" target="_blank">
-            <i className="fas fa-download"></i> 立即下载
-          </a>
-          <a href="https://github.com/CsBpRd/news-browser" className="btn btn-outline" target="_blank">
-            <i className="fab fa-github"></i> 查看源码
-          </a>
+      <section className="hero" style={{ padding: '180px 20px 80px' }}>
+        <div style={{ maxWidth: 800, margin: '0 auto' }}>
+          <img
+            src="/tonglan-icon.png"
+            alt="通览"
+            style={{ width: 100, height: 100, borderRadius: 22, marginBottom: 24, boxShadow: '0 12px 40px rgba(251,146,60,0.3)' }}
+            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+          />
+          <h1 style={{ marginBottom: 16 }}>
+            通览
+          </h1>
+          <p style={{ fontSize: '1.5rem', opacity: 0.9 }}>可自定义名称、周期、目录与主题的新闻报告浏览器。支持 HTML、Markdown、纯文本，自动识别文件格式，即开即用。</p>
+          <div className="hero-btns">
+            <a href="https://github.com/CsBpRd/news-browser/releases/latest" className="btn" target="_blank">
+              <i className="fas fa-download"></i> 立即下载
+            </a>
+            <a href="https://github.com/CsBpRd/news-browser" className="btn btn-outline" target="_blank">
+              <i className="fab fa-github"></i> 查看源码
+            </a>
+          </div>
         </div>
       </section>
 
