@@ -12,7 +12,10 @@
             </div>
             <div id="backgroundFormStyle">
                 <form action="https://www.bing.com/search" method="get" target="_parent" id="searchForm">
-                    <select id="engineSelect"></select>
+                    <div id="engineSelectWrap">
+                        <button type="button" class="engine-select-btn" id="engineSelectBtn"></button>
+                        <ul id="engineDropdown"></ul>
+                    </div>
                     <input type="hidden" name="search" value="？">
                     <input type="text" name="q" id="searchInput" autocomplete="off" placeholder="搜索一下...">
                     <input type="submit" value="" id="confirmInput">
@@ -82,16 +85,21 @@
                     <button class="icon-tab active" data-tab="symbol">符号图标</button>
                 </div>
                 <div class="icon-tab-content" id="tabUpload">
-                    <input type="file" id="iconFileInput" accept="image/*">
+                    <label class="file-upload-btn" for="iconFileInput">选择图片</label>
+                    <input type="file" id="iconFileInput" accept="image/*" style="display:none">
                     <div id="iconPreview" class="icon-preview"></div>
                 </div>
-                <div class="icon-tab-content" id="tabSymbol">
-                    <input type="text" id="symbolInput" class="modal-input" placeholder="输入emoji或字符" maxlength="2" readonly>
-                    <div id="symbolPreview" class="symbol-preview"></div>
-                    <div class="symbol-options">
-                        <label><input type="checkbox" id="symbolBold"> 加粗</label>
-                        <label>颜色 <input type="color" id="symbolColor" value="#000000"></label>
+                <div class="icon-tab-content active" id="tabSymbol">
+                    <div id="symbolPreview" class="symbol-preview">
+                        <span class="symbol-char" id="symbolChar"></span>
+                        <button type="button" class="symbol-tool-btn" id="symbolBoldBtn">加粗</button>
+                        <button type="button" class="symbol-color-btn" id="symbolColorBtn">
+                            <span class="symbol-color-dot" id="symbolColorDot"></span>
+                            颜色
+                        </button>
                     </div>
+                    <input type="color" id="symbolColor" value="#000000" style="display:none">
+                    <div class="symbol-color-panel" id="symbolColorPanel"></div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -112,7 +120,10 @@
                     <h4 class="settings-section-title">搜索引擎</h4>
                     <div class="settings-row">
                         <label class="settings-label">当前引擎</label>
-                        <select id="settingsEngineSelect" class="settings-select"></select>
+                        <div class="settings-select-wrap" id="settingsEngineSelectWrap">
+                            <button type="button" class="settings-select-btn" id="settingsEngineSelectBtn"></button>
+                            <ul id="settingsEngineDropdown"></ul>
+                        </div>
                         <button class="settings-del-btn" id="deleteEngineBtn">删除</button>
                     </div>
                     <div class="settings-row">
@@ -127,14 +138,15 @@
                         <label class="settings-label">自定义文字</label>
                         <input type="text" id="customTextInput" class="modal-input" placeholder="输入文本，支持 {time} {date} {HH:mm:ss} 等变量">
                     </div>
-                    <div id="customTextHint" style="color:#999;font-size:12px;margin-top:6px;line-height:1.7;">变量：{greet} {ds_balance} 或任意格式 {HH:mm:ss} {yyyy年MM月dd日} {yyyy-MM-dd} {EEEE}<br>| 分隔多矩形</div>
+                    <div class="settings-note">注：支持{greet} {ds_balance}等模块以及 {HH:mm:ss}等时间格式化模块，使用“|”分隔多矩形。</div>
+                    <div id="charCounter" style="color:#999;font-size:11px;margin-top:4px;">字数：0/80</div>
+                </div>
+                <div class="settings-section">
+                    <h4 class="settings-section-title">数据管理</h4>
                     <div class="settings-row">
                         <label class="settings-label">DeepSeek Key</label>
                         <input type="password" id="dsKeyInput" class="modal-input" placeholder="sk-...（DeepSeek API Key）">
                     </div>
-                </div>
-                <div class="settings-section">
-                    <h4 class="settings-section-title">数据管理</h4>
                     <div class="settings-row">
                         <button class="modal-btn modal-btn-cancel" id="resetAllBtn" style="color:#c44;" onclick="resetAllData()">清除配置</button>
                     </div>

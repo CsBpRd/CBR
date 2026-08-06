@@ -163,26 +163,65 @@
   }
 
   function renderEngineSelect() {
-    var sel = document.getElementById('engineSelect');
-    var settingsSel = document.getElementById('settingsEngineSelect');
-    sel.innerHTML = '';
-    settingsSel.innerHTML = '';
+    var btn = document.getElementById('engineSelectBtn');
+    var dd = document.getElementById('engineDropdown');
+    var settingsBtn = document.getElementById('settingsEngineSelectBtn');
+    var settingsDd = document.getElementById('settingsEngineDropdown');
+    btn.textContent = state.currentEngine;
+    settingsBtn.textContent = state.currentEngine;
+    dd.innerHTML = '';
+    settingsDd.innerHTML = '';
 
     state.engines.forEach(function(eng) {
-      var opt1 = document.createElement('option');
-      opt1.value = eng.name;
-      opt1.textContent = eng.name;
-      sel.appendChild(opt1);
+      var li = document.createElement('li');
+      li.textContent = eng.name;
+      if (eng.name === state.currentEngine) li.className = 'active';
+      li.addEventListener('click', function() {
+        state.currentEngine = eng.name;
+        localStorage.setItem(KEYS.currentEngine, state.currentEngine);
+        renderEngineSelect();
+        updateSearchAction();
+        closeEngineDropdown();
+        closeSettingsEngineDropdown();
+      });
+      dd.appendChild(li);
 
-      var opt2 = document.createElement('option');
-      opt2.value = eng.name;
-      opt2.textContent = eng.name;
-      settingsSel.appendChild(opt2);
+      var sLi = document.createElement('li');
+      sLi.textContent = eng.name;
+      if (eng.name === state.currentEngine) sLi.className = 'active';
+      sLi.addEventListener('click', function() {
+        state.currentEngine = eng.name;
+        saveEngines();
+        renderEngineSelect();
+        updateSearchAction();
+        closeSettingsEngineDropdown();
+      });
+      settingsDd.appendChild(sLi);
     });
 
-    sel.value = state.currentEngine;
-    settingsSel.value = state.currentEngine;
     updateSearchAction();
+  }
+
+  function toggleEngineDropdown() {
+    var wrap = document.getElementById('engineSelectWrap');
+    var btn = document.getElementById('engineSelectBtn');
+    if (wrap.classList.contains('open')) {
+      closeEngineDropdown();
+    } else {
+      wrap.classList.add('open');
+      btn.textContent = '切换';
+    }
+  }
+
+  function closeEngineDropdown() {
+    var wrap = document.getElementById('engineSelectWrap');
+    var btn = document.getElementById('engineSelectBtn');
+    wrap.classList.remove('open');
+    btn.textContent = state.currentEngine;
+  }
+
+  function closeSettingsEngineDropdown() {
+    document.getElementById('settingsEngineDropdown').classList.remove('open');
   }
 
   function updateSearchAction() {
@@ -420,6 +459,36 @@
     return out;
   }
 
+  function getDisplayLength(text) {
+    var expanded = parseCustomText(text);
+    var len = 0;
+    for (var i = 0; i < expanded.length; i++) {
+      len += expanded.charCodeAt(i) > 127 ? 2 : 1;
+    }
+    return len;
+  }
+
+  function truncateCustomText(text, maxUnits) {
+    var cutAt = text.length;
+    for (var n = 0; n <= text.length; n++) {
+      var partial = text.substring(0, n);
+      var w = getDisplayLength(partial);
+      if (w > maxUnits) { cutAt = n - 1; break; }
+    }
+    return text.substring(0, cutAt);
+  }
+
+  function updateCharCounter() {
+    var input = document.getElementById('customTextInput');
+    var counter = document.getElementById('charCounter');
+    if (!input || !counter) return;
+    var raw = input.value;
+    var len = getDisplayLength(raw);
+    var maxUnits = 80;
+    counter.textContent = '字数：' + len + '/' + maxUnits;
+    counter.style.color = len > maxUnits ? '#c44' : '#999';
+  }
+
   var contextMenu = document.getElementById('contextMenu');
 
   function showContextMenu(e, items) {
@@ -488,10 +557,78 @@
   var shortcutUrlInput = document.getElementById('shortcutUrl');
   var iconFileInput = document.getElementById('iconFileInput');
   var iconPreview = document.getElementById('iconPreview');
-  var symbolInput = document.getElementById('symbolInput');
   var symbolPreview = document.getElementById('symbolPreview');
-  var symbolBold = document.getElementById('symbolBold');
+  var symbolChar = document.getElementById('symbolChar');
+  var symbolBoldBtn = document.getElementById('symbolBoldBtn');
+  var symbolColorBtn = document.getElementById('symbolColorBtn');
+  var symbolColorDot = document.getElementById('symbolColorDot');
+  var symbolColorPanel = document.getElementById('symbolColorPanel');
   var symbolColor = document.getElementById('symbolColor');
+  var symbolRgbRanges = {};
+
+  var COLOR_PALETTE = ['#000000','#444444','#888888','#bbbbbb','#7f8c8d','#c0392b','#e74c3c','#e67e22','#f1c40f','#27ae60','#16a085','#2980b9','#2c3e50','#8e44ad','#e91e63','#795548'];
+
+  function rgbToHex(r, g, b) {
+    return '#' + [r, g, b].map(function(v) {
+      return ('0' + v.toString(16)).slice(-2);
+    }).join('');
+  }
+
+  function clamp255(v) {
+    var n = parseInt(v, 10);
+    if (isNaN(n)) return 0;
+    return Math.max(0, Math.min(255, n));
+  }
+
+  function hexToRgb(hex) {
+    var h = (hex || '#000000').replace('#', '');
+    if (h.length === 3) {
+      h = h.split('').map(function(c) { return c + c; }).join('');
+    }
+    var n = parseInt(h, 16);
+    return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+  }
+
+  function buildColorPanel() {
+    symbolColorPanel.innerHTML = '';
+    COLOR_PALETTE.forEach(function(c) {
+      var sw = document.createElement('span');
+      sw.className = 'symbol-color-swatch';
+      sw.style.background = c;
+      sw.addEventListener('click', function() {
+        symbolColor.value = c;
+        symbolColorPanel.classList.remove('open');
+        updateSymbolPreviewStyle();
+      });
+      symbolColorPanel.appendChild(sw);
+    });
+
+    var custom = document.createElement('div');
+    custom.className = 'symbol-color-custom';
+    ['r', 'g', 'b'].forEach(function(ch) {
+      var label = document.createElement('label');
+      label.className = 'rgb-label';
+      label.textContent = ch.toUpperCase();
+      var numInput = document.createElement('input');
+      numInput.type = 'number';
+      numInput.min = 0;
+      numInput.max = 255;
+      numInput.value = 0;
+      numInput.className = 'rgb-num-input';
+      numInput.addEventListener('input', function() {
+        symbolColor.value = rgbToHex(
+          clamp255(symbolRgbRanges.r.value),
+          clamp255(symbolRgbRanges.g.value),
+          clamp255(symbolRgbRanges.b.value)
+        );
+        updateSymbolPreviewStyle();
+      });
+      label.appendChild(numInput);
+      custom.appendChild(label);
+      symbolRgbRanges[ch] = numInput;
+    });
+    symbolColorPanel.appendChild(custom);
+  }
 
   function getIconChars(name) {
     if (!name) return '';
@@ -501,8 +638,7 @@
   function autoFillSymbol() {
     if (state.currentIconType === 'symbol') {
       var n = shortcutNameInput.value.trim();
-      symbolInput.value = getIconChars(n);
-      symbolPreview.textContent = symbolInput.value;
+      symbolChar.textContent = getIconChars(n);
       updateSymbolPreviewStyle();
     }
   }
@@ -519,10 +655,10 @@
     shortcutUrlInput.value = '';
     iconFileInput.value = '';
     iconPreview.innerHTML = '';
-    symbolInput.value = '';
-    symbolPreview.textContent = '';
-    symbolBold.checked = true;
+    symbolChar.textContent = '';
+    symbolBoldBtn.classList.add('active');
     symbolColor.value = '#000000';
+    updateSymbolPreviewStyle();
     setActiveTab('symbol');
     shortcutModal.classList.add('active');
     shortcutNameInput.focus();
@@ -538,10 +674,10 @@
     shortcutNameInput.value = sc.name;
     shortcutUrlInput.value = sc.url;
     iconFileInput.value = '';
-    symbolInput.value = getIconChars(sc.name);
-    symbolPreview.textContent = getIconChars(sc.name);
-    symbolBold.checked = sc.iconType === 'symbol' ? (sc.iconBold !== false) : (sc.iconType === 'auto' ? true : false);
+    symbolChar.textContent = getIconChars(sc.name);
+    symbolBoldBtn.classList.toggle('active', sc.iconType === 'symbol' ? (sc.iconBold !== false) : (sc.iconType === 'auto' ? true : false));
     symbolColor.value = sc.iconType === 'symbol' && sc.iconColor ? sc.iconColor : (sc.iconType === 'auto' ? '#000000' : '#000000');
+    updateSymbolPreviewStyle();
 
     if (sc.iconType === 'upload' && sc.iconData) {
       iconPreview.innerHTML = '<img src="' + sc.iconData + '">';
@@ -558,10 +694,42 @@
     document.querySelectorAll('.icon-tab').forEach(function(t) {
       t.classList.toggle('active', t.getAttribute('data-tab') === tab);
     });
-    document.querySelectorAll('.icon-tab-content').forEach(function(c) {
-      c.classList.remove('active');
+    var target = document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1));
+    if (!shortcutModal.classList.contains('active')) {
+      document.querySelectorAll('.icon-tab-content').forEach(function(c) {
+        c.classList.remove('active');
+        c.style.height = '';
+        c.style.opacity = '';
+      });
+      target.classList.add('active');
+      return;
+    }
+    document.querySelectorAll('.icon-tab-content.active').forEach(function(old) {
+      if (old === target) return;
+      old.style.height = old.scrollHeight + 'px';
+      old.style.opacity = '1';
+      void old.offsetHeight;
+      old.classList.remove('active');
+      old.style.height = '0px';
+      old.style.opacity = '0';
+      old.addEventListener('transitionend', function h() {
+        old.removeEventListener('transitionend', h);
+        old.style.height = '';
+      });
     });
-    document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
+    if (!target.classList.contains('active')) {
+      target.classList.add('active');
+      target.style.height = '0px';
+      target.style.opacity = '0';
+      void target.offsetHeight;
+      target.style.height = target.scrollHeight + 'px';
+      target.style.opacity = '1';
+      target.addEventListener('transitionend', function handler() {
+        target.removeEventListener('transitionend', handler);
+        target.style.height = '';
+        target.style.opacity = '';
+      });
+    }
   }
 
   document.querySelectorAll('.icon-tab').forEach(function(tab) {
@@ -582,12 +750,30 @@
     reader.readAsDataURL(file);
   });
 
-  symbolBold.addEventListener('change', updateSymbolPreviewStyle);
-  symbolColor.addEventListener('input', updateSymbolPreviewStyle);
+  symbolBoldBtn.addEventListener('click', function() {
+    symbolBoldBtn.classList.toggle('active');
+    updateSymbolPreviewStyle();
+  });
+  symbolColorBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    symbolColorPanel.classList.toggle('open');
+  });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('#symbolColorPanel') && !e.target.closest('#symbolColorBtn')) {
+      symbolColorPanel.classList.remove('open');
+    }
+  });
 
   function updateSymbolPreviewStyle() {
-    symbolPreview.style.fontWeight = symbolBold.checked ? 'bold' : 'normal';
-    symbolPreview.style.color = symbolColor.value;
+    symbolChar.style.fontWeight = symbolBoldBtn.classList.contains('active') ? 'bold' : 'normal';
+    symbolChar.style.color = symbolColor.value;
+    symbolColorDot.style.background = symbolColor.value;
+    if (symbolRgbRanges && symbolRgbRanges.r) {
+      var rgb = hexToRgb(symbolColor.value);
+      symbolRgbRanges.r.value = clamp255(rgb.r);
+      symbolRgbRanges.g.value = clamp255(rgb.g);
+      symbolRgbRanges.b.value = clamp255(rgb.b);
+    }
   }
 
   document.getElementById('shortcutModalClose').addEventListener('click', function() {
@@ -616,7 +802,7 @@
       iconData = getIconChars(name);
     }
 
-    var iconBold = iconType === 'symbol' ? (symbolBold.checked || true) : false;
+    var iconBold = iconType === 'symbol' ? (symbolBoldBtn.classList.contains('active') || true) : false;
     var iconColor = iconType === 'symbol' ? (symbolColor.value || '#000000') : '';
 
     if (state.editingShortcut) {
@@ -658,22 +844,11 @@
   var settingsModal = document.getElementById('settingsModal');
 
   function openSettings() {
-    renderSettingsEngineSelect();
+    renderEngineSelect();
     document.getElementById('customTextInput').value = state.display.customText || '';
     document.getElementById('dsKeyInput').value = state.dsKey || '';
     settingsModal.classList.add('active');
-  }
-
-  function renderSettingsEngineSelect() {
-    var sel = document.getElementById('settingsEngineSelect');
-    sel.innerHTML = '';
-    state.engines.forEach(function(eng) {
-      var opt = document.createElement('option');
-      opt.value = eng.name;
-      opt.textContent = eng.name;
-      sel.appendChild(opt);
-    });
-    sel.value = state.currentEngine;
+    updateCharCounter();
   }
 
   document.getElementById('settingsModalClose').addEventListener('click', function() {
@@ -681,13 +856,6 @@
   });
   document.getElementById('settingsModalCloseBtn').addEventListener('click', function() {
     settingsModal.classList.remove('active');
-  });
-
-  document.getElementById('settingsEngineSelect').addEventListener('change', function() {
-    state.currentEngine = this.value;
-    document.getElementById('engineSelect').value = state.currentEngine;
-    saveEngines();
-    updateSearchAction();
   });
 
   document.getElementById('addEngineBtn').addEventListener('click', function() {
@@ -701,14 +869,12 @@
     state.engines.push({ name: name, urlTemplate: url });
     saveEngines();
     renderEngineSelect();
-    renderSettingsEngineSelect();
     document.getElementById('newEngineName').value = '';
     document.getElementById('newEngineUrl').value = '';
   });
 
   document.getElementById('deleteEngineBtn').addEventListener('click', function() {
-    var sel = document.getElementById('settingsEngineSelect');
-    var name = sel.value;
+    var name = state.currentEngine;
     if (name === '必应' || name === '百度') {
       alert('默认引擎不可删除');
       return;
@@ -724,13 +890,17 @@
     }
     saveEngines();
     renderEngineSelect();
-    renderSettingsEngineSelect();
   });
 
   document.getElementById('customTextInput').addEventListener('input', function() {
+    var truncated = truncateCustomText(this.value, 80);
+    if (truncated !== this.value) {
+      this.value = truncated;
+    }
     state.display.customText = this.value;
     saveDisplay();
     renderDisplayCards();
+    updateCharCounter();
   });
   document.getElementById('dsKeyInput').addEventListener('input', function() {
     state.dsKey = this.value.trim();
@@ -753,14 +923,29 @@
       shortcutModal.classList.remove('active');
       settingsModal.classList.remove('active');
       hideContextMenu();
+      closeEngineDropdown();
+      closeSettingsEngineDropdown();
     }
   });
 
-  /* Engine select change */
-  document.getElementById('engineSelect').addEventListener('change', function() {
-    state.currentEngine = this.value;
-    localStorage.setItem(KEYS.currentEngine, state.currentEngine);
-    updateSearchAction();
+  /* Engine select */
+  document.getElementById('engineSelectBtn').addEventListener('click', function(e) {
+    e.stopPropagation();
+    toggleEngineDropdown();
+  });
+
+  document.getElementById('settingsEngineSelectBtn').addEventListener('click', function(e) {
+    e.stopPropagation();
+    document.getElementById('settingsEngineDropdown').classList.toggle('open');
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('#engineSelectWrap')) {
+      closeEngineDropdown();
+    }
+    if (!e.target.closest('#settingsEngineSelectWrap')) {
+      closeSettingsEngineDropdown();
+    }
   });
 
   function adjustSearchWidth() {
@@ -830,6 +1015,7 @@
 
   /* Init */
   loadAll();
+  buildColorPanel();
   renderShortcuts();
   renderEngineSelect();
   renderDisplayCards();
