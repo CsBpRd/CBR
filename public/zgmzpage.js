@@ -4,6 +4,7 @@
     engines: 'zgmz_engines',
     currentEngine: 'zgmz_currentEngine',
     display: 'zgmz_display',
+    dsKey: 'zgmz_dsKey',
     defaultShortcuts: 'zgmz_defaultShortcuts'
   };
 
@@ -15,11 +16,7 @@
   ];
 
   var DEFAULT_DISPLAY = {
-    showDate: true,
-    showTime: true,
-    showGreeting: true,
-    customText: '',
-    userName: ''
+    customText: ''
   };
 
   var state = {
@@ -27,10 +24,13 @@
     engines: [],
     currentEngine: '必应',
     display: {},
+    dsKey: '',
     editingShortcut: null,
     currentIconType: 'auto',
     uploadedIconData: ''
   };
+
+  var dsBalanceCache = { value: '', at: 0, pending: false };
 
   function genId() {
     return Date.now().toString(36) + Math.random().toString(36).substr(2, 6);
@@ -62,15 +62,26 @@
       state.currentEngine = ce || '必应';
     } catch(e) { state.currentEngine = '必应'; }
 
+    var di = null;
     try {
-      var di = localStorage.getItem(KEYS.display);
-      state.display = di ? JSON.parse(di) : null;
-    } catch(e) { state.display = null; }
-
-    if (!state.display) {
+      di = localStorage.getItem(KEYS.display);
+    } catch(e) {}
+    if (di) {
+      try {
+        var parsedDisplay = JSON.parse(di);
+        state.display = { customText: parsedDisplay.customText || '' };
+      } catch(e) {
+        state.display = { customText: '' };
+      }
+    } else {
       state.display = JSON.parse(JSON.stringify(DEFAULT_DISPLAY));
       saveDisplay();
     }
+
+    try {
+      var dk = localStorage.getItem(KEYS.dsKey);
+      state.dsKey = dk || '';
+    } catch(e) { state.dsKey = ''; }
   }
 
   function saveShortcuts() {
@@ -82,6 +93,9 @@
   }
   function saveDisplay() {
     localStorage.setItem(KEYS.display, JSON.stringify(state.display));
+  }
+  function saveDsKey() {
+    localStorage.setItem(KEYS.dsKey, state.dsKey);
   }
 
   function getDomain(url) {
@@ -208,23 +222,13 @@
   function renderDisplayCards() {
     var container = document.getElementById('displayCards');
     container.innerHTML = '';
-    var d = state.display;
-
-    if (d.showDate) {
-      var card = createCard('date', formatDate(new Date()));
-      container.appendChild(card);
-    }
-    if (d.showTime) {
-      var card = createCard('time', formatTime(new Date()));
-      container.appendChild(card);
-    }
-    if (d.showGreeting) {
-      var card = createCard('greeting', getGreeting(d.userName || ''));
-      container.appendChild(card);
-    }
-    if (d.customText) {
-      var card = createCard('custom', parseCustomText(d.customText));
-      container.appendChild(card);
+    var text = state.display.customText || '';
+    if (text) {
+      text.split(/[|｜]/).forEach(function(part) {
+        if (!part.trim()) return;
+        var card = createCard('custom', parseCustomText(part));
+        container.appendChild(card);
+      });
     }
     adjustSearchWidth();
   }
@@ -246,103 +250,174 @@
     return div;
   }
 
-  function formatDate(d) {
-    return d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日';
-  }
-
-  function formatTime(d) {
-    var h = d.getHours();
-    var m = d.getMinutes();
-    var s = d.getSeconds();
-    return pad(h) + ':' + pad(m) + ':' + pad(s);
-  }
-
   function pad(n) {
     return n < 10 ? '0' + n : '' + n;
   }
 
-  function getGreeting(userName) {
-    var h = new Date().getHours();
-    var greeting;
-    if (h >= 5 && h < 12) greeting = '早上好';
-    else if (h >= 12 && h < 18) greeting = '下午好';
-    else greeting = '晚上好';
-    if (userName) return greeting + '，' + userName;
-    return greeting;
+  function pad3(n) {
+    return n < 10 ? '00' + n : (n < 100 ? '0' + n : '' + n);
   }
 
-  function getGreetingBase() {
+  var WEEKDAYS_CN = ['日', '一', '二', '三', '四', '五', '六'];
+  var MONTHS_CN = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+  var ICU_LETTERS = 'GyYuUrQqMLwWdDFgEecahHkKmsSzZvVOxX';
+
+  function getGreet() {
     var h = new Date().getHours();
-    if (h >= 5 && h < 12) return '早上好';
-    if (h >= 12 && h < 18) return '下午好';
+    if (h >= 5 && h < 9) return '早上好';
+    if (h >= 9 && h < 12) return '上午好';
+    if (h >= 12 && h < 14) return '中午好';
+    if (h >= 14 && h < 18) return '下午好';
     return '晚上好';
+  }
+
+  function getDsBalance() {
+    if (!state.dsKey) return '未配置';
+    if (dsBalanceCache.value && Date.now() - dsBalanceCache.at < 60000) {
+      return dsBalanceCache.value;
+    }
+    if (!dsBalanceCache.pending) {
+      dsBalanceCache.pending = true;
+      fetchDsBalance();
+    }
+    return dsBalanceCache.value || '查询中…';
+  }
+
+  function fetchDsBalance() {
+    fetch('https://api.deepseek.com/user/balance', {
+      headers: { 'Authorization': 'Bearer ' + state.dsKey }
+    }).then(function(res) {
+      return res.json();
+    }).then(function(obj) {
+      var info = obj && obj.balance_infos && obj.balance_infos[0];
+      dsBalanceCache.value = info && typeof info.total_balance !== 'undefined'
+        ? (info.currency === 'CNY' ? info.total_balance + '元' : '$' + info.total_balance)
+        : '查询失败';
+      dsBalanceCache.at = Date.now();
+      dsBalanceCache.pending = false;
+      renderDisplayCards();
+    }).catch(function() {
+      dsBalanceCache.value = '查询失败';
+      dsBalanceCache.at = Date.now();
+      dsBalanceCache.pending = false;
+      renderDisplayCards();
+    });
+  }
+
+  function strftime(format, d) {
+    var dayOfYear = Math.floor((d - new Date(d.getFullYear(), 0, 1)) / 86400000) + 1;
+    var map = {
+      '%Y': String(d.getFullYear()),
+      '%y': pad(d.getFullYear() % 100),
+      '%m': pad(d.getMonth() + 1),
+      '%d': pad(d.getDate()),
+      '%e': d.getDate() < 10 ? ' ' + d.getDate() : String(d.getDate()),
+      '%H': pad(d.getHours()),
+      '%I': pad(d.getHours() % 12 || 12),
+      '%M': pad(d.getMinutes()),
+      '%S': pad(d.getSeconds()),
+      '%p': d.getHours() < 12 ? '上午' : '下午',
+      '%A': '星期' + WEEKDAYS_CN[d.getDay()],
+      '%a': '周' + WEEKDAYS_CN[d.getDay()],
+      '%B': MONTHS_CN[d.getMonth()],
+      '%b': MONTHS_CN[d.getMonth()].substring(0, 3),
+      '%j': pad3(dayOfYear),
+      '%u': d.getDay() === 0 ? '7' : String(d.getDay()),
+      '%w': String(d.getDay()),
+      '%F': d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()),
+      '%T': pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds()),
+      '%%': '%'
+    };
+    return format.replace(/%(Y|y|m|d|e|H|I|M|S|p|A|a|B|b|j|u|w|F|T|%)/g, function(m) {
+      return map[m];
+    });
+  }
+
+  function shouldUseICU(token) {
+    for (var i = 0; i < token.length; i++) {
+      var ch = token[i];
+      if (/[A-Za-z]/.test(ch) && ICU_LETTERS.indexOf(ch) === -1) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function icuFormat(format, d) {
+    var tokens = format.match(/[A-Za-z]+|[^A-Za-z]+/g) || [];
+    var out = '';
+    tokens.forEach(function(tok) {
+      if (!/^[A-Za-z]+$/.test(tok)) {
+        out += tok;
+        return;
+      }
+      var kind = tok.charAt(0);
+      var len = tok.length;
+      var h = d.getHours();
+      switch (kind) {
+        case 'y':
+          out += len >= 3 ? String(d.getFullYear()) : pad(d.getFullYear() % 100);
+          break;
+        case 'M':
+          if (len >= 3) out += MONTHS_CN[d.getMonth()];
+          else if (len === 2) out += pad(d.getMonth() + 1);
+          else out += String(d.getMonth() + 1);
+          break;
+        case 'd':
+          out += len === 2 ? pad(d.getDate()) : String(d.getDate());
+          break;
+        case 'H':
+          out += len === 2 ? pad(h) : String(h);
+          break;
+        case 'h':
+          out += len === 2 ? pad(h % 12 || 12) : String(h % 12 || 12);
+          break;
+        case 'm':
+          out += len === 2 ? pad(d.getMinutes()) : String(d.getMinutes());
+          break;
+        case 's':
+          out += len === 2 ? pad(d.getSeconds()) : String(d.getSeconds());
+          break;
+        case 'E':
+          out += len >= 4 ? '星期' + WEEKDAYS_CN[d.getDay()] : '周' + WEEKDAYS_CN[d.getDay()];
+          break;
+        case 'a':
+          out += h < 12 ? '上午' : '下午';
+          break;
+        case 'G':
+          out += '公元';
+          break;
+        default:
+          out += tok;
+      }
+    });
+    return out;
   }
 
   function parseCustomText(template) {
     var d = new Date();
-    var userName = state.display.userName || '';
-    var vars = {
-      name: userName,
-      greeting: getGreetingBase(),
-      time: formatTime(d),
-      date: formatDate(d),
-      hour: pad(d.getHours()),
-      minute: pad(d.getMinutes()),
-      second: pad(d.getSeconds()),
-      weekday: '星期' + ['日','一','二','三','四','五','六'][d.getDay()]
-    };
-    return template.replace(/\{(\w+)\}/g, function(match, key) {
-      return vars[key] !== undefined ? vars[key] : match;
-    });
-  }
-
-  function getDisplayLength(text) {
-    var expanded = parseCustomText(text);
-    var len = 0;
-    for (var i = 0; i < expanded.length; i++) {
-      len += expanded.charCodeAt(i) > 127 ? 2 : 1;
+    var out = '';
+    var lastIndex = 0;
+    var match;
+    var regex = /\{([^{}]*)\}/g;
+    while ((match = regex.exec(template)) !== null) {
+      out += template.substring(lastIndex, match.index);
+      lastIndex = regex.lastIndex;
+      var token = match[1];
+      if (token === 'greet') {
+        out += getGreet();
+      } else if (token === 'ds_balance') {
+        out += getDsBalance();
+      } else if (token.indexOf('%') !== -1) {
+        out += strftime(token, d);
+      } else if (shouldUseICU(token)) {
+        out += icuFormat(token, d);
+      } else {
+        out += token;
+      }
     }
-    return len;
-  }
-
-  function truncateCustomText(text, maxUnits) {
-    var expanded = parseCustomText(text);
-    var weight = 0;
-    var cutAt = text.length;
-    // Find shortest prefix within limit by iterating the raw template text
-    // We expand the full template, then figure out how many raw chars produce <= maxUnits
-    // Simple approach: binary search on raw text length
-    for (var n = 0; n <= text.length; n++) {
-      var partial = text.substring(0, n);
-      var w = getDisplayLength(partial);
-      if (w > maxUnits) { cutAt = n - 1; break; }
-    }
-    return text.substring(0, cutAt);
-  }
-
-  function updateCharCounter() {
-    var input = document.getElementById('customTextInput');
-    var counter = document.getElementById('charCounter');
-    if (!input || !counter) return;
-    var raw = input.value;
-    var len = getDisplayLength(raw);
-    var maxUnits = 80;
-    counter.textContent = len + '/' + maxUnits;
-    counter.style.color = len > maxUnits ? '#c44' : '#999';
-  }
-  function updateCustomText() {
-    var customCard = document.querySelector('[data-card="custom"] .card-value');
-    if (customCard && state.display.customText) {
-      customCard.textContent = parseCustomText(state.display.customText);
-    }
-  }
-
-  function updateTime() {
-    var timeCard = document.querySelector('[data-card="time"] .card-value');
-    if (timeCard) {
-      timeCard.textContent = formatTime(new Date());
-    }
-    updateCustomText();
+    out += template.substring(lastIndex);
+    return out;
   }
 
   var contextMenu = document.getElementById('contextMenu');
@@ -584,17 +659,9 @@
 
   function openSettings() {
     renderSettingsEngineSelect();
-    document.getElementById('toggleDate').checked = state.display.showDate;
-    document.getElementById('toggleTime').checked = state.display.showTime;
-    document.getElementById('toggleGreeting').checked = state.display.showGreeting;
-    document.getElementById('toggleCustomText').checked = !!state.display.customText;
     document.getElementById('customTextInput').value = state.display.customText || '';
-    document.getElementById('customTextRow').style.display = state.display.customText ? 'flex' : 'none';
-    document.getElementById('customTextHint').style.display = state.display.customText ? 'block' : 'none';
-    document.getElementById('charCounter').style.display = state.display.customText ? 'block' : 'none';
-    document.getElementById('userNameInput').value = state.display.userName || '';
+    document.getElementById('dsKeyInput').value = state.dsKey || '';
     settingsModal.classList.add('active');
-    updateCharCounter();
   }
 
   function renderSettingsEngineSelect() {
@@ -660,45 +727,15 @@
     renderSettingsEngineSelect();
   });
 
-  document.getElementById('toggleDate').addEventListener('change', function() {
-    state.display.showDate = this.checked;
-    saveDisplay();
-    renderDisplayCards();
-  });
-  document.getElementById('toggleTime').addEventListener('change', function() {
-    state.display.showTime = this.checked;
-    saveDisplay();
-    renderDisplayCards();
-  });
-  document.getElementById('toggleGreeting').addEventListener('change', function() {
-    state.display.showGreeting = this.checked;
-    saveDisplay();
-    renderDisplayCards();
-  });
-  document.getElementById('toggleCustomText').addEventListener('change', function() {
-    document.getElementById('customTextRow').style.display = this.checked ? 'flex' : 'none';
-    document.getElementById('customTextHint').style.display = this.checked ? 'block' : 'none';
-    document.getElementById('charCounter').style.display = this.checked ? 'block' : 'none';
-    updateCharCounter();
-    if (!this.checked) {
-      state.display.customText = '';
-      saveDisplay();
-      renderDisplayCards();
-    }
-  });
   document.getElementById('customTextInput').addEventListener('input', function() {
-    var truncated = truncateCustomText(this.value, 80);
-    if (truncated !== this.value) {
-      this.value = truncated;
-    }
     state.display.customText = this.value;
     saveDisplay();
     renderDisplayCards();
-    updateCharCounter();
   });
-  document.getElementById('userNameInput').addEventListener('input', function() {
-    state.display.userName = this.value;
-    saveDisplay();
+  document.getElementById('dsKeyInput').addEventListener('input', function() {
+    state.dsKey = this.value.trim();
+    saveDsKey();
+    dsBalanceCache = { value: '', at: 0, pending: false };
     renderDisplayCards();
   });
 
@@ -746,11 +783,30 @@
 
   /* Welcome Modal */
   var welcomeModal = document.getElementById('welcomeModal');
-  var welcomeStartBtn = document.getElementById('welcomeStartBtn');
+  var welcomeNextBtn = document.getElementById('welcomeNextBtn');
+  var welcomeSlides = document.querySelectorAll('.welcome-slide');
+  var welcomeDots = document.querySelectorAll('.welcome-dot');
+  var welcomeIndex = 0;
 
-  welcomeStartBtn.addEventListener('click', function() {
-    localStorage.setItem('zgmz_welcomed', 'true');
-    welcomeModal.classList.remove('active');
+  function showWelcomeSlide(i) {
+    welcomeIndex = i;
+    welcomeSlides.forEach(function(slide, idx) {
+      slide.classList.toggle('active', idx === i);
+    });
+    welcomeDots.forEach(function(dot, idx) {
+      dot.classList.toggle('active', idx === i);
+    });
+    welcomeNextBtn.textContent = i === welcomeSlides.length - 1 ? '开始使用' : '下一步';
+  }
+
+  welcomeNextBtn.addEventListener('click', function() {
+    if (welcomeIndex < welcomeSlides.length - 1) {
+      showWelcomeSlide(welcomeIndex + 1);
+    } else {
+      localStorage.setItem('zgmz_welcomed', 'true');
+      welcomeModal.classList.remove('active');
+      showWelcomeSlide(0);
+    }
   });
 
   function checkWelcome() {
@@ -766,6 +822,7 @@
     localStorage.removeItem('zgmz_engines');
     localStorage.removeItem('zgmz_currentEngine');
     localStorage.removeItem('zgmz_display');
+    localStorage.removeItem('zgmz_dsKey');
     localStorage.removeItem('zgmz_welcomed');
     localStorage.removeItem('zgmz_defaultShortcuts');
     location.reload();
@@ -778,6 +835,6 @@
   renderDisplayCards();
   adjustSearchWidth();
   checkWelcome();
-  setInterval(updateTime, 1000);
+  setInterval(renderDisplayCards, 1000);
   window.addEventListener('resize', adjustSearchWidth);
 })();
